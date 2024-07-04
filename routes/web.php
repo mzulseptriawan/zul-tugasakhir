@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Pembina\PembinaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
@@ -28,7 +29,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'pembina'])->group(function () {
-
+    Route::get('/pembina/dashboard', [PembinaController::class, 'index'])->name('pbIndex');
 });
 
 Route::middleware(['auth', 'member'])->group(function () {
