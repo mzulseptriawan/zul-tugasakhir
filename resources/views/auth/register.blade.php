@@ -47,6 +47,7 @@
                                 @csrf
                                 <input type="hidden" name="id">
                                 <input type="hidden" name="level" value="3">
+                                <input type="hidden" name="status" value="Aktif">
 
                                 <div class="mb-3">
                                     <label for="exampleInputName1" class="form-label">Nama Panggilan</label>
