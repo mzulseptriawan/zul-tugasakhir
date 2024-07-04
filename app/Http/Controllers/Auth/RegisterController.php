@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'no_hp' => ['required', 'string', 'min:10'],
             'level' => ['required'],
-            'status' => ['required'],
+            'status' => ['required', 'string'],
         ]);
     }
 
