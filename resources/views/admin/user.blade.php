@@ -55,8 +55,10 @@
                                                 Admin
                                             @elseif ($data->level == '2')
                                                 Pembina
+                                            @elseif($data->level == '3')
+                                                Member
                                             @else
-                                                Unknown
+                                                Tidak diketahui
                                             @endif
                                         </span>
                                     </td>
