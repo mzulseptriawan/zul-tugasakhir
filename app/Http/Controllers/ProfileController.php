@@ -12,6 +12,18 @@ class ProfileController extends Controller
         return view('profile.index');
     }
 
+    public function account($id) {
+        $query  = DB::table('users')
+            ->where('id', $id)
+            ->get();
+
+        $data = array(
+            'dataAccount' => $query
+        );
+
+        return view('profile.accounts', $data);
+    }
+
     /**
      * @throws ValidationException
      */
@@ -30,15 +42,16 @@ class ProfileController extends Controller
                 'name'      => $req -> name,
                 'email'     => $req -> email,
                 'password'  => bcrypt ($req -> password),
-                'alamat'    => $req -> alamat,
                 'no_hp'     => $req -> no_hp,
                 'foto'      => $image -> hashName(),
             ]);
 
         if ($query){
-            return redirect('/settings')->with('success','Data akun berhasil dirubah.');
+            Alert('Sukses', 'Profil anda berhasil diganti!','success');
+            return redirect('/settings');
         } else {
-            return redirect('/settings')->with('error','Data akun gagal dirubah.');
+            Alert('Gagal', 'Profil anda gagal diganti!','error');
+            return redirect('/settings');
         }
     }
 }

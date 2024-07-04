@@ -1,12 +1,34 @@
 @extends('layouts.template')
 @section('title', 'Pusat Akun')
 @section('content')
+    <style>
+        .password-wrapper {
+            position: relative;
+        }
+        .toggle-password {
+            position: absolute;
+            top: 0%;
+            right: 820px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .password-wrapper .invalid-feedback {
+            display: block;
+            position: absolute;
+            top: 100%;
+            right: 10px;
+            transform: translateY(10%);
+            width: auto;
+        }
+    </style>
+
     <div class="card">
         <div class="card-body">
             <h5 class="card-title fw-semibold mb-4">Pusat Akun</h5>
             <div class="card">
                 <div class="card-body">
-                    <form class="col-xl-12 col-lg-12 col-md-12" action="" method="POST"
+                    <form class="col-xl-12 col-lg-12 col-md-12" action="{{ route('updateAccount') }}" method="POST"
                           enctype="multipart/form-data">
                         @csrf
 
@@ -14,28 +36,38 @@
                             <input type="hidden" name="id" class="form-control" id="id" value="{{ $data -> id }}" readonly>
 
                             <div class="mb-3">
-                                <label for="exampleInputName1" class="form-label">Nama Lengkap</label>
+                                <label for="exampleInputName1" class="form-label">Nama Panggilan</label>
                                 <input type="text" name="name" class="form-control" id="exampleInputName1" value="{{ $data -> name }}" aria-describedby="nameHelp">
                             </div>
 
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Alamat Email</label>
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="{{ $data -> email }}" aria-describedby="emailHelp">
+                                <label for="exampleInputEmail1" class="form-label">Email</label>
+                                <input type="text" name="email" class="form-control" value="{{ $data -> email }}" id="exampleInputEmail1">
                             </div>
 
-                            <div class="mb-3">
+                            <div class="mb-4 password-wrapper">
                                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                                <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" oninput="validatePassword()" required>
+                                <div class="invalid-feedback" id="passwordError">
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <button type="button" class="toggle-password" onclick="togglePassword('exampleInputPassword1', 'password-confirm')">👁️</button>
                             </div>
 
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1" onclick="togglePassword()">
-                                <label class="form-check-label" for="exampleCheck1">Tampilkan Password</label>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="exampleInputAlamat1" class="form-label">Alamat</label>
-                                <input type="text" name="alamat" class="form-control" value="{{ $data -> alamat }}" id="exampleInputAlamat1">
+                            <div class="mb-4 password-wrapper">
+                                <label for="password-confirm" class="form-label">{{ __('Konfirmasi Password') }}</label>
+                                <input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" oninput="validatePassword()" required autocomplete="new-password">
+                                <div class="invalid-feedback" id="confirmPasswordError">
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="mb-3">
@@ -59,14 +91,49 @@
     </div>
 
     <script>
-        function togglePassword() {
-            var passwordField = document.getElementById('exampleInputPassword1');
-            if (document.getElementById('exampleCheck1').checked) {
-                passwordField.type = 'text';
-            } else {
-                passwordField.type = 'password';
-            }
+        function togglePassword(...ids) {
+            ids.forEach(id => {
+                var passwordField = document.getElementById(id);
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    document.querySelector('.toggle-password').textContent = '🙈';
+                } else {
+                    passwordField.type = 'password';
+                    document.querySelector('.toggle-password').textContent = '👁️';
+                }
+            });
         }
+
+        function validatePassword() {
+            var passwordField = document.getElementById('exampleInputPassword1');
+            var confirmPasswordField = document.getElementById('password-confirm');
+            var password = passwordField.value;
+            var confirmPassword = confirmPasswordField.value;
+            var passwordError = document.getElementById('passwordError');
+            var confirmPasswordError = document.getElementById('confirmPasswordError');
+            var regex = /^.{8,}$/;
+
+            if (!regex.test(password)) {
+                passwordError.textContent = "Password harus minimal 8 karakter.";
+                passwordField.classList.add('is-invalid');
+                return false;
+            } else {
+                passwordError.textContent = "";
+                passwordField.classList.remove('is-invalid');
+            }
+
+            if (password !== confirmPassword) {
+                confirmPasswordError.textContent = "Konfirmasi password tidak cocok.";
+                confirmPasswordField.classList.add('is-invalid');
+                return false;
+            } else {
+                confirmPasswordError.textContent = "";
+                confirmPasswordField.classList.remove('is-invalid');
+            }
+
+            return true;
+        }
+
 
         function validateNumberLength(input) {
             let value = input.value;

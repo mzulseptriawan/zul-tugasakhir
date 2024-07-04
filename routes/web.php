@@ -35,8 +35,8 @@ Route::middleware(['auth', 'member'])->group(function () {
     Route::get('/member/dashboard', [MemberController::class, 'index'])->name('mbIndex');
 });
 
-Route::middleware(['auth', 'user'])->group(function () {
-    Route::get('/settings', [ProfileController::class, 'index'])->name('profileIndex');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/settings', [ProfileController::class, 'index'])->name('profile');
     Route::get('/settings/{id}', [ProfileController::class, 'account'])->name('account');
     Route::post('/settings/update',[ProfileController::class, 'update'])->name('updateAccount');
 });
