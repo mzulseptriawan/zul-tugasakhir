@@ -9,15 +9,23 @@ use Illuminate\Support\Facades\DB;
 class DataController extends Controller
 {
     public function pegawai() {
-        $pegawai = DB::table('data_pegawai')->get();
-        $idPegawai = DB::table('data_pegawai')->where('id_pegawai')->get();
+        $query = array(
+            'pegawai' => DB::table('data_pegawai')->get());
 
-        return view('pembina.pegawai', compact('pegawai','idPegawai'));
+        return view('pembina.pegawai', $query);
     }
 
     public function detailPegawai($id) {
         $pegawai = DB::table('data_pegawai')->where('id_pegawai', $id)->get();
 
         return response()->json($pegawai);
+    }
+
+    public function addPegawai() {
+        return view('pembina.pegawaiAdd');
+    }
+
+    public function submitPegawai() {
+
     }
 }

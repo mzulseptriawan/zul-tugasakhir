@@ -13,7 +13,7 @@
         <div class="card w-100">
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Daftar Pegawai</h5>
-                <a class="btn btn-primary" href="#">Tambahkan Pegawai</a>
+                <a class="btn btn-primary" href="{{ route('pbAddPegawai') }}">Tambahkan Pegawai</a>
                 <div class="table-responsive">
                     <table class="table text-nowrap mb-0 align-middle">
                         <thead class="text-dark fs-4">
@@ -73,22 +73,36 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Function Modal Detail Pegawai
-        document.addEventListener('DOMContentLoaded', function () {
-            const detailButtons = document.querySelectorAll('.btn-detail');
-            const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
-            const pegawaiDetail = document.getElementById('pegawai-detail');
 
-            detailButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const id = this.getAttribute('data-id-pegawai');
+        document.addEventListener('DOMContentLoaded', function () {
+            class EmployeeDetailHandler {
+                constructor() {
+                    this.detailButtons = document.querySelectorAll('.btn-detail');
+                    this.detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
+                    this.pegawaiDetail = document.getElementById('pegawai-detail');
+                    this.initEvents();
+                }
+
+                initEvents() {
+                    this.detailButtons.forEach(button => {
+                        button.addEventListener('click', this.handleDetailClick.bind(this));
+                    });
+                }
+
+                handleDetailClick(event) {
+                    const button = event.currentTarget;
+                    const id = button.getAttribute('data-id-pegawai');
+                    this.fetchEmployeeDetail(id);
+                }
+
+                fetchEmployeeDetail(id) {
                     fetch(`/pembina/pegawai/${id}`)
                         .then(response => {
                             if (!response.ok) {
@@ -97,46 +111,52 @@
                             return response.json();
                         })
                         .then(data => {
-                            pegawaiDetail.innerHTML = `
-                                <p><strong>NIK:</strong> ${data[0].nik}</p>
-                                <p><strong>Nama:</strong> ${data[0].nama_lengkap}</p>
-                                <p><strong>Tempat Lahir:</strong> ${data[0].tempat_lahir}</p>
-                                <p><strong>Tanggal Lahir:</strong> ${data[0].tanggal_lahir}</p>
-                                <p><strong>Jenis Kelamin:</strong> ${data[0].jenis_kelamin}</p>
-                                <p><strong>Alamat:</strong> ${data[0].alamat}</p>
-                                <p><strong>No Telepon:</strong> ${data[0].no_telepon}</p>
-                                <p><strong>Email:</strong> ${data[0].email}</p>
-                                <p><strong>Tanggal Masuk:</strong> ${data[0].tanggal_masuk}</p>
-                                <p><strong>Posisi:</strong> ${data[0].posisi}</p>
-                                <p><strong>Gaji:</strong> ${formatRupiah(data[0].gaji, 'Rp. ')}</p>
-                                <p><strong>Status Pegawai:</strong> ${data[0].status_pegawai}</p>
-                            `;
-                            detailModal.show();
+                            this.displayEmployeeDetail(data);
                         })
                         .catch(error => {
                             console.error('Error fetching data:', error);
-                            pegawaiDetail.innerHTML = `<p class="text-danger">Terjadi kesalahan: ${error.message}</p>`;
-                            detailModal.show();
+                            this.pegawaiDetail.innerHTML = `<p class="text-danger">Terjadi kesalahan: ${error.message}</p>`;
+                            this.detailModal.show();
                         });
-                });
-            });
-        });
+                }
 
-        // Convertion number to rupiah
-        function formatRupiah(angka, prefix) {
-            var number_string = angka.toString().replace(/[^,\d]/g, ''),
-                split = number_string.split(','),
-                sisa = split[0].length % 3,
-                rupiah = split[0].substr(0, sisa),
-                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+                displayEmployeeDetail(data) {
+                    this.pegawaiDetail.innerHTML = `
+                <p><strong>NIK:</strong> ${data[0].nik}</p>
+                <p><strong>Nama:</strong> ${data[0].nama_lengkap}</p>
+                <p><strong>Tempat Lahir:</strong> ${data[0].tempat_lahir}</p>
+                <p><strong>Tanggal Lahir:</strong> ${data[0].tanggal_lahir}</p>
+                <p><strong>Jenis Kelamin:</strong> ${data[0].jenis_kelamin}</p>
+                <p><strong>Alamat:</strong> ${data[0].alamat}</p>
+                <p><strong>No Telepon:</strong> ${data[0].no_telepon}</p>
+                <p><strong>Email:</strong> ${data[0].email}</p>
+                <p><strong>Tanggal Masuk:</strong> ${data[0].tanggal_masuk}</p>
+                <p><strong>Posisi:</strong> ${data[0].posisi}</p>
+                <p><strong>Gaji:</strong> ${this.formatRupiah(data[0].gaji, 'Rp. ')}</p>
+                <p><strong>Status Pegawai:</strong> ${data[0].status_pegawai}</p>
+            `;
+                    this.detailModal.show();
+                }
 
-            if (ribuan) {
-                let separator = sisa ? '.' : '';
-                rupiah += separator + ribuan.join('.');
+                formatRupiah(angka, prefix) {
+                    var number_string = angka.toString().replace(/[^,\d]/g, ''),
+                        split = number_string.split(','),
+                        sisa = split[0].length % 3,
+                        rupiah = split[0].substr(0, sisa),
+                        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                    if (ribuan) {
+                        let separator = sisa ? '.' : '';
+                        rupiah += separator + ribuan.join('.');
+                    }
+
+                    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+                }
             }
 
-            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-        }
+            new EmployeeDetailHandler();
+        });
+
     </script>
 @endsection
