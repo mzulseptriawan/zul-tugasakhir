@@ -92,7 +92,7 @@
                     fetch(`/pembina/pegawai/${id}`)
                         .then(response => {
                             if (!response.ok) {
-                                throw new Error('Network response was not ok');
+                                throw new Error('Tidak ada respon dari server.');
                             }
                             return response.json();
                         })
@@ -114,7 +114,7 @@
                         })
                         .catch(error => {
                             console.error('Error fetching data:', error);
-                            pegawaiDetail.innerHTML = `<p class="text-danger">Error fetching data: ${error.message}</p>`;
+                            pegawaiDetail.innerHTML = `<p class="text-danger">Terjadi kesalahan: ${error.message}</p>`;
                             detailModal.show();
                         });
                 });
