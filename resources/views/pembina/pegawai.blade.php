@@ -103,7 +103,7 @@
                 }
 
                 fetchEmployeeDetail(id) {
-                    fetch(`/pembina/pegawai/json/${id}`)
+                    fetch(`/pembina/pegawai/detail/${id}`)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Tidak ada respon dari server.');

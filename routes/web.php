@@ -34,7 +34,7 @@ Route::middleware(['auth', 'pembina'])->group(function () {
     Route::get('/pembina/pegawai', [DataController::class, 'pegawai'])->name('pbPegawai');
     Route::get('/pembina/internship', [PembinaController::class, 'index'])->name('pbInternship');
     // CRUD Pegawai
-    Route::get('/pembina/pegawai/json/{id}', [DataController::class, 'detailPegawai'])->name('pbDetailPegawai');
+    Route::get('/pembina/pegawai/detail/{id}', [DataController::class, 'detailPegawai'])->name('pbDetailPegawai');
     Route::get('/pembina/pegawai/add', [DataController::class, 'addPegawai'])->name('pbAddPegawai');
     Route::post('/pembina/pegawai/submit', [DataController::class, 'submitPegawai'])->name('pbSubmitPegawai');
     Route::get('/pembina/pegawai/delete/{data}', [DataController::class, ''])->name('pbDeletePegawai');
