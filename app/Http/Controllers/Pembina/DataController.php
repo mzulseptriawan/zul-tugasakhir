@@ -66,4 +66,51 @@ class DataController extends Controller
             return redirect('/pembina/pegawai/add');
         }
     }
+
+    public function editPegawai($id) {
+        $pegawai = DB::table('data_pegawai')->where('id_pegawai', $id)->get();
+
+        return view('pembina.pegawaiEdit', compact('pegawai'));
+    }
+
+    public function updatePegawai(Request $req) {
+        try {
+            $this->validate($req,[
+                'foto_pegawai'      => 'required|image|mimes:png,jpg,jpeg,webp'
+            ]);
+
+            //upload image
+            $image = $req->file('foto_pegawai');
+            $image -> storeAs('public/foto_pegawai', $image -> hashName());
+            $query = DB::table('data_pegawai')
+                ->where('id_pegawai', $req -> id_pegawai)
+                ->update([
+                    'id_pegawai'     => $req -> id_pegawai,
+                    'nik'            => $req -> nik,
+                    'nama_lengkap'   => $req -> nama_lengkap,
+                    'tempat_lahir'   => $req -> tempat_lahir,
+                    'tanggal_lahir'  => $req -> tanggal_lahir,
+                    'jenis_kelamin'  => $req -> jenis_kelamin,
+                    'alamat'         => $req -> alamat,
+                    'no_telepon'     => $req -> no_telepon,
+                    'email'          => $req -> email,
+                    'tanggal_masuk'  => $req -> tanggal_masuk,
+                    'posisi'         => $req -> posisi,
+                    'gaji'           => $req -> gaji,
+                    'foto_pegawai'   => $image -> hashName(),
+                    'updated_at'     => Carbon::now('Asia/Jakarta'),
+                ]);
+
+            if($query){
+                Alert('Berhasil', 'Data pegawai berhasil diganti!','success');
+                return redirect('/pembina/pegawai');
+            } else {
+                Alert('Gagal', 'Data pegawai gagal diganti!','error');
+                return redirect('/pembina/pegawai/add');
+            }
+        } catch (\Exception $e) {
+            Alert('Data pegawai gagal disimpan!', 'Error: '.$e->getMessage(),'error');
+            return redirect('/pembina/pegawai/add');
+        }
+    }
 }
