@@ -13,6 +13,10 @@ class DataController extends Controller
         $query = array(
             'pegawai' => DB::table('data_pegawai')->get());
 
+        $title = 'Peringatan!';
+        $text = "Anda yakin ingin menghapus data ini? Tindakan anda tidak dapat dibatalkan!";
+        confirmDelete($title, $text);
+
         return view('pembina.pegawai', $query);
     }
 
@@ -111,6 +115,20 @@ class DataController extends Controller
         } catch (\Exception $e) {
             Alert('Data pegawai gagal disimpan!', 'Error: '.$e->getMessage(),'error');
             return redirect('/pembina/pegawai/add');
+        }
+    }
+
+    public function deletePegawai($id) {
+        $query = DB::table('data_pegawai')
+            ->where('id_pegawai', $id)
+            ->delete();
+
+        if ($query) {
+            Alert('Berhasil', 'Data pegawai berhasil dihapus!','success');
+            return redirect('/pembina/pegawai');
+        } else {
+            Alert('Gagal', 'Data pegawai gagal dihapus!','error');
+            return redirect('/pembina/pegawai');
         }
     }
 }

@@ -32,14 +32,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth', 'pembina'])->group(function () {
     Route::get('/pembina/dashboard', [PembinaController::class, 'index'])->name('pbIndex');
     Route::get('/pembina/pegawai', [DataController::class, 'pegawai'])->name('pbPegawai');
-    Route::get('/pembina/internship', [PembinaController::class, 'index'])->name('pbInternship');
+    Route::get('/pembina/internship', [DataController::class, ''])->name('pbInternship');
     // CRUD Pegawai
     Route::get('/pembina/pegawai/detail/{id}', [DataController::class, 'detailPegawai'])->name('pbDetailPegawai');
     Route::get('/pembina/pegawai/add', [DataController::class, 'addPegawai'])->name('pbAddPegawai');
     Route::post('/pembina/pegawai/submit', [DataController::class, 'submitPegawai'])->name('pbSubmitPegawai');
-    Route::get('/pembina/pegawai/delete/{data}', [DataController::class, ''])->name('pbDeletePegawai');
-    Route::get('/pembina/pegawai/edit/{data}', [DataController::class, ''])->name('pbEditPegawai');
-    Route::post('/pembina/pegawai/update', [DataController::class, ''])->name('pbUpdatePegawai');
+    Route::get('/pembina/pegawai/delete/{id}', [DataController::class, 'deletePegawai'])->name('pbDeletePegawai');
+    Route::get('/pembina/pegawai/edit/{data}', [DataController::class, 'editPegawai'])->name('pbEditPegawai');
+    Route::post('/pembina/pegawai/update', [DataController::class, 'updatePegawai'])->name('pbUpdatePegawai');
     // CRUD Internship
     Route::get('/pembina/internship/add', [DataController::class, ''])->name('pbAddInternship');
     Route::post('/pembina/internship/submit', [DataController::class, ''])->name('pbSubmitInternship');

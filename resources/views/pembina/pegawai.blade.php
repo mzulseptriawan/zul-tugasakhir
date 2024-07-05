@@ -12,25 +12,28 @@
     <div class="col-lg-12 d-flex align-items-stretch">
         <div class="card w-100">
             <div class="card-body p-4">
-                <h5 class="card-title fw-semibold mb-4">Daftar Pegawai</h5>
+                <h5 class="card-title fw-semibold mb-4">Data Pegawai</h5>
                 <a class="btn btn-primary" href="{{ route('pbAddPegawai') }}">Tambahkan Pegawai</a>
                 <div class="table-responsive">
                     <table class="table text-nowrap mb-0 align-middle">
                         <thead class="text-dark fs-4">
-                        <tr>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">No</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Foto</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Nama Lengkap</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Aksi</h6>
-                            </th>
-                        </tr>
+                            <tr>
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">No</h6>
+                                </th>
+
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Foto</h6>
+                                </th>
+
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Nama Lengkap</h6>
+                                </th>
+
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Aksi</h6>
+                                </th>
+                            </tr>
                         </thead>
 
                         <tbody>
@@ -38,16 +41,39 @@
                         @if($pegawai)
                             @foreach($pegawai as $data)
                                 <tr>
-                                    <td class="border-bottom-0"><h6 class="fw-semibold mb-0">{{ $no++ }}</h6></td>
+                                    <td class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">{{ $no++ }}</h6>
+                                    </td>
+
                                     <td class="border-bottom-0">
                                         <img class="img-fluid" width="100" height="100" src="{{ url('storage/foto_pegawai/' . $data->foto_pegawai) }}" alt="Foto Pegawai">
                                     </td>
+
                                     <td class="border-bottom-0">
                                         <h6 class="fw-semibold mb-1">{{ $data->nama_lengkap }}</h6>
                                         <span class="fw-normal">{{ $data->posisi }}</span>
                                     </td>
-                                    <td class="border-bottom-0">
-                                        <button class="btn btn-outline-primary btn-detail" data-id-pegawai="{{ $data->id_pegawai }}">Lihat Detail</button>
+
+                                    <td class="nav-item dropdown">
+                                        <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ti ti-menu-2 fs-6"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                                            <div class="message-body">
+                                                <a class="d-flex align-items-center gap-2 dropdown-item btn-detail dropdown-item" href="javascript:void(0)" data-id-pegawai="{{ $data->id_pegawai }}">
+                                                    <i class="ti ti-eye fs-6"></i>
+                                                    <p class="mb-0 fs-3">Lihat Detail</p>
+                                                </a>
+                                                <a href="{{ route('pbDeletePegawai', $data -> id_pegawai) }}" class="d-flex align-items-center gap-2 dropdown-item" data-confirm-delete="true">
+                                                    <i class="ti ti-trash fs-6"></i>
+                                                    <p class="mb-0 fs-3">Hapus Data</p>
+                                                </a>
+                                                <a href="{{ route('pbEditPegawai', $data -> id_pegawai) }}" class="d-flex align-items-center gap-2 dropdown-item">
+                                                    <i class="ti ti-pencil fs-6"></i>
+                                                    <p class="mb-0 fs-3">Edit Data</p>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
