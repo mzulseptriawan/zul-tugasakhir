@@ -47,7 +47,7 @@
                                         <span class="fw-normal">{{ $data->posisi }}</span>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <button class="btn btn-primary btn-detail" data-id-pegawai="{{ $data->id_pegawai }}">Lihat Detail</button>
+                                        <button class="btn btn-outline-primary btn-detail" data-id-pegawai="{{ $data->id_pegawai }}">Lihat Detail</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -103,7 +103,7 @@
                 }
 
                 fetchEmployeeDetail(id) {
-                    fetch(`/pembina/pegawai/${id}`)
+                    fetch(`/pembina/pegawai/json/${id}`)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Tidak ada respon dari server.');

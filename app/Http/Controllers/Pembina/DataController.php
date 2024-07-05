@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pembina;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +26,39 @@ class DataController extends Controller
         return view('pembina.pegawaiAdd');
     }
 
-    public function submitPegawai() {
+    public function submitPegawai(Request $req) {
+        $this->validate($req,[
+            'foto'      => 'required|image|mimes:png,jpg,jpeg,webp'
+        ]);
 
+        //upload image
+        $image = $req->file('foto_pegawai');
+        $image -> storeAs('public/foto_pegawai', $image -> hashName());
+        $query = DB::table('data_pegawai')
+            ->insert([
+                'id_pegawai'     => $req -> id_pegawai,
+                'nik'            => $req -> nik,
+                'nama_lengkap'   => $req -> nama_lengkap,
+                'tempat_lahir'   => $req -> tempat_lahir,
+                'tanggal_lahir'  => $req -> tanggal_lahir,
+                'jenis_kelamin'  => $req -> jenis_kelamin,
+                'alamat'         => $req -> alamat,
+                'no_telepon'     => $req -> no_telepon,
+                'email'          => $req -> email,
+                'tanggal_masuk'  => $req -> tanggal_masuk,
+                'posisi'         => $req -> posisi,
+                'gaji'           => $req -> gaji,
+                'status_pegawai' => $req -> status_pegawai,
+                'foto'           => $image -> hashName(),
+                'created_at'     => Carbon::now('Asia/Jakarta'),
+            ]);
+
+        if($query){
+            Alert('Berhasil', 'Data pegawai berhasil disimpan!','success');
+            return redirect('/pembina/pegawai');
+        } else {
+            Alert('Gagal', 'Data pegawai gagal disimpan!','error');
+            return redirect('/pembina/pegawai/add');
+        }
     }
 }

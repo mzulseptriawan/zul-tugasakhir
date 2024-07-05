@@ -34,18 +34,18 @@ Route::middleware(['auth', 'pembina'])->group(function () {
     Route::get('/pembina/pegawai', [DataController::class, 'pegawai'])->name('pbPegawai');
     Route::get('/pembina/internship', [PembinaController::class, 'index'])->name('pbInternship');
     // CRUD Pegawai
-    Route::get('/pembina/pegawai/{id}', [DataController::class, 'detailPegawai'])->name('pbDetailPegawai');
+    Route::get('/pembina/pegawai/json/{id}', [DataController::class, 'detailPegawai'])->name('pbDetailPegawai');
     Route::get('/pembina/pegawai/add', [DataController::class, 'addPegawai'])->name('pbAddPegawai');
     Route::post('/pembina/pegawai/submit', [DataController::class, 'submitPegawai'])->name('pbSubmitPegawai');
-    Route::get('/pembina/pegawai/delete/{data}', [DataController::class, 'index'])->name('pbDeletePegawai');
-    Route::get('/pembina/pegawai/edit/{data}', [DataController::class, 'index'])->name('pbEditPegawai');
-    Route::post('/pembina/pegawai/update', [DataController::class, 'index'])->name('pbUpdatePegawai');
+    Route::get('/pembina/pegawai/delete/{data}', [DataController::class, ''])->name('pbDeletePegawai');
+    Route::get('/pembina/pegawai/edit/{data}', [DataController::class, ''])->name('pbEditPegawai');
+    Route::post('/pembina/pegawai/update', [DataController::class, ''])->name('pbUpdatePegawai');
     // CRUD Internship
-    Route::get('/pembina/internship/add', [PembinaController::class, 'index'])->name('pbAddInternship');
-    Route::post('/pembina/internship/submit', [PembinaController::class, 'index'])->name('pbSubmitInternship');
-    Route::get('/pembina/internship/delete/{data}', [PembinaController::class, 'index'])->name('pbDeleteInternship');
-    Route::get('/pembina/internship/edit/{data}', [PembinaController::class, 'index'])->name('pbEditInternship');
-    Route::post('/pembina/internship/update', [PembinaController::class, 'index'])->name('pbUpdateInternship');
+    Route::get('/pembina/internship/add', [DataController::class, ''])->name('pbAddInternship');
+    Route::post('/pembina/internship/submit', [DataController::class, ''])->name('pbSubmitInternship');
+    Route::get('/pembina/internship/delete/{data}', [DataController::class, ''])->name('pbDeleteInternship');
+    Route::get('/pembina/internship/edit/{data}', [DataController::class, ''])->name('pbEditInternship');
+    Route::post('/pembina/internship/update', [DataController::class, ''])->name('pbUpdateInternship');
 });
 
 Route::middleware(['auth', 'member'])->group(function () {
