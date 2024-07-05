@@ -100,6 +100,7 @@
                             pegawaiDetail.innerHTML = `
                                 <p><strong>NIK:</strong> ${data[0].nik}</p>
                                 <p><strong>Nama:</strong> ${data[0].nama_lengkap}</p>
+                                <p><strong>Tempat Lahir:</strong> ${data[0].tempat_lahir}</p>
                                 <p><strong>Tanggal Lahir:</strong> ${data[0].tanggal_lahir}</p>
                                 <p><strong>Jenis Kelamin:</strong> ${data[0].jenis_kelamin}</p>
                                 <p><strong>Alamat:</strong> ${data[0].alamat}</p>
