@@ -40,6 +40,7 @@ Route::middleware(['auth', 'pembina'])->group(function () {
     Route::get('/pembina/pegawai/delete/{id}', [DataController::class, 'deletePegawai'])->name('pbDeletePegawai');
     Route::get('/pembina/pegawai/edit/{data}', [DataController::class, 'editPegawai'])->name('pbEditPegawai');
     Route::post('/pembina/pegawai/update', [DataController::class, 'updatePegawai'])->name('pbUpdatePegawai');
+    Route::post('/pembina/pegawai/foto/update', [DataController::class, 'updateFotoPegawai'])->name('pbUpdateFotoPegawai');
     // CRUD Internship
     Route::get('/pembina/internship/add', [DataController::class, ''])->name('pbAddInternship');
     Route::post('/pembina/internship/submit', [DataController::class, ''])->name('pbSubmitInternship');

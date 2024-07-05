@@ -79,13 +79,6 @@ class DataController extends Controller
 
     public function updatePegawai(Request $req) {
         try {
-            $this->validate($req,[
-                'foto_pegawai'      => 'required|image|mimes:png,jpg,jpeg,webp'
-            ]);
-
-            //upload image
-            $image = $req->file('foto_pegawai');
-            $image -> storeAs('public/foto_pegawai', $image -> hashName());
             $query = DB::table('data_pegawai')
                 ->where('id_pegawai', $req -> id_pegawai)
                 ->update([
@@ -101,20 +94,20 @@ class DataController extends Controller
                     'tanggal_masuk'  => $req -> tanggal_masuk,
                     'posisi'         => $req -> posisi,
                     'gaji'           => $req -> gaji,
-                    'foto_pegawai'   => $image -> hashName(),
+                    'status_pegawai'   => $req -> status_pegawai,
                     'updated_at'     => Carbon::now('Asia/Jakarta'),
                 ]);
 
             if($query){
                 Alert('Berhasil', 'Data pegawai berhasil diganti!','success');
-                return redirect('/pembina/pegawai');
+                return redirect('/pembina/pegawai/');
             } else {
                 Alert('Gagal', 'Data pegawai gagal diganti!','error');
-                return redirect('/pembina/pegawai/add');
+                return redirect('/pembina/pegawai/');
             }
         } catch (\Exception $e) {
             Alert('Data pegawai gagal disimpan!', 'Error: '.$e->getMessage(),'error');
-            return redirect('/pembina/pegawai/add');
+            return redirect('/pembina/pegawai/');
         }
     }
 
@@ -129,6 +122,32 @@ class DataController extends Controller
         } else {
             Alert('Gagal', 'Data pegawai gagal dihapus!','error');
             return redirect('/pembina/pegawai');
+        }
+    }
+
+    public function updateFotoPegawai(Request $req) {
+        try {
+            $this->validate($req,[
+                'foto_pegawai'      => 'required|image|mimes:png,jpg,jpeg,webp'
+            ]);
+
+            $image = $req->file('foto_pegawai');
+            $image -> storeAs('public/foto_pegawai', $image -> hashName());
+            $query = DB::table('data_pegawai')
+                ->where('id_pegawai', $req -> id_pegawai)
+                ->update([
+                    'id_pegawai'     => $req -> id_pegawai,
+                    'foto_pegawai'   => $image -> hashName(),
+                    'updated_at'     => Carbon::now('Asia/Jakarta'),
+                ]);
+
+            if ($query){
+                Alert('Berhasil', 'Foto pegawai berhasil diganti!','success');
+                return redirect('/pembina/pegawai/');
+            }
+        } catch (\Exception $e) {
+            Alert('Gagal', 'Foto pegawai gagal diganti!', 'Error: '.$e->getMessage(),'error');
+            return redirect('/pembina/pegawai/');
         }
     }
 }
