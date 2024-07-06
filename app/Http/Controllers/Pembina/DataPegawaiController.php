@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DataController extends Controller
+class DataPegawaiController extends Controller
 {
     public function pegawai() {
         $query = array(
