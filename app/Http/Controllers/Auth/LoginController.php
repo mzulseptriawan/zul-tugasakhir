@@ -52,7 +52,6 @@ class LoginController extends Controller
             Alert('Akun di-nonaktifkan!', 'Silahkan hubungi Admin.' ,'error');
             return redirect('/');
         } else if ($user -> level == 3 && $user -> status == "Aktif") {
-            $request->session()->flush();
             Alert('Berhasil', 'Anda telah login sebagai '. Auth::user() -> name ,'success');
             return redirect('/member/dashboard');
         } else if ($user -> level == 3 && $user -> status == "Tidak Aktif") {

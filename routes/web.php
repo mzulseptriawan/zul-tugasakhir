@@ -32,9 +32,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::middleware(['auth', 'pembina'])->group(function () {
     Route::get('/pembina/dashboard', [PembinaController::class, 'index'])->name('pbIndex');
-    Route::get('/pembina/pegawai', [DataPegawaiController::class, 'pegawai'])->name('pbPegawai');
-    Route::get('/pembina/internship', [DataInternshipController::class, 'internship'])->name('pbInternship');
     // CRUD Pegawai
+    Route::get('/pembina/pegawai', [DataPegawaiController::class, 'pegawai'])->name('pbPegawai');
     Route::get('/pembina/pegawai/detail/{id}', [DataPegawaiController::class, 'detailPegawai'])->name('pbDetailPegawai');
     Route::get('/pembina/pegawai/add', [DataPegawaiController::class, 'addPegawai'])->name('pbAddPegawai');
     Route::post('/pembina/pegawai/submit', [DataPegawaiController::class, 'submitPegawai'])->name('pbSubmitPegawai');
@@ -43,6 +42,7 @@ Route::middleware(['auth', 'pembina'])->group(function () {
     Route::post('/pembina/pegawai/update', [DataPegawaiController::class, 'updatePegawai'])->name('pbUpdatePegawai');
     Route::post('/pembina/pegawai/foto/update', [DataPegawaiController::class, 'updateFotoPegawai'])->name('pbUpdateFotoPegawai');
     // CRUD Internship
+    Route::get('/pembina/internship', [DataInternshipController::class, 'internship'])->name('pbInternship');
     Route::get('/pembina/internship/detail/{id}', [DataInternshipController::class, 'detailInternship'])->name('pbDetailInternship');
     Route::get('/pembina/internship/add', [DataInternshipController::class, 'addInternship'])->name('pbAddInternship');
     Route::post('/pembina/internship/submit', [DataInternshipController::class, 'submitInternship'])->name('pbSubmitInternship');
