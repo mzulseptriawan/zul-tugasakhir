@@ -91,7 +91,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="{{ route('pbInternship') }}" class="sidebar-link">
                             <span><i class="ti ti-mood-smile"></i></span>
                             <span class="hide-menu">Data Internship</span>
                         </a>
