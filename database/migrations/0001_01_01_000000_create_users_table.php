@@ -13,16 +13,19 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_detail');
             $table->string('name');
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
-            $table->boolean('level')->nullable(); // L1 Suadmin L2 Admin
+            $table->boolean('level')->nullable(); // L1 Admin L2 Pembina L3 Member
             $table->string('password');
             $table->string('no_hp');
             $table->string('foto');
             $table->enum('status', ['Aktif', 'Tidak Aktif'])->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->index('id_detail');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

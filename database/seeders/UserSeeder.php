@@ -16,9 +16,10 @@ class UserSeeder extends Seeder
     {
         ([
             $user = new User,
+            $user -> id_detail = 1,
             $user -> name = "Zul",
             $user -> email = "mzulfikarseptriawan@gmail.com",
-            $user -> password = bcrypt('29'),
+            $user -> password = bcrypt('Qwerty123'),
             $user -> level = 1,
             $user -> foto = "",
             $user -> no_hp = '089657784310',
@@ -28,9 +29,23 @@ class UserSeeder extends Seeder
 
         ([
             $user = new User,
+            $user -> id_detail = 2,
             $user -> name = "Admin",
             $user -> email = "admin@gmail.com",
-            $user -> password = bcrypt('1'),
+            $user -> password = bcrypt('Qwerty123'),
+            $user -> level = 2,
+            $user -> foto = "",
+            $user -> no_hp = '089512093389',
+            $user -> status = "Aktif",
+            $user -> save(),
+        ]);
+
+        ([
+            $user = new User,
+            $user -> id_detail = 3,
+            $user -> name = "Member",
+            $user -> email = "member@gmail.com",
+            $user -> password = bcrypt('Qwerty123'),
             $user -> level = 2,
             $user -> foto = "",
             $user -> no_hp = '089512093389',

@@ -21,7 +21,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('adIndex');
     Route::get('/admin/users', [UserManagementController::class, 'user'])->name('adUser');
-    // CRUD Users
+    // User Management
     Route::get('/admin/users/add', [UserManagementController::class, 'add'])->name('adAdd');
     Route::post('/admin/users/submit', [UserManagementController::class, 'submit'])->name('adSubmit');
     Route::get('/admin/users/delete/{data}', [UserManagementController::class, 'delete'])->name('adDelete');
