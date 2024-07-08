@@ -47,6 +47,7 @@
                                 @csrf
                                 <input type="hidden" name="id">
                                 <input type="hidden" name="level" value="3">
+                                <input type="hidden" name="foto" value="profile.png">
                                 <input type="hidden" name="status" value="Aktif">
 
                                 <div class="mb-3">

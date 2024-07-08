@@ -27,6 +27,20 @@ class User extends Authenticatable
         'status'
     ];
 
+    public static function booted()
+    {
+        static::creating(function ($user) {
+            // Sementara set id_detail ke nilai dummy
+            $user->id_detail = 0;
+        });
+
+        static::created(function ($user) {
+            // Perbarui id_detail setelah user dibuat
+            $user->id_detail = $user->id;
+            $user->save();
+        });
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
