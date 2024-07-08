@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class DataInternshipController extends Controller {
     public function internship() {
         $query = array(
-            'internship' => DB::table('data_internship')->get());
+            'internship' => DB::table('internships')->get());
 
         $title = 'Peringatan!';
         $text = "Anda yakin ingin menghapus data ini? Tindakan anda tidak dapat dibatalkan!";
@@ -20,7 +20,7 @@ class DataInternshipController extends Controller {
     }
 
     public function detailInternship($id) {
-        $internship = DB::table('data_internship')->where('id_internship', $id)->get();
+        $internship = DB::table('internships')->where('id_internship', $id)->get();
 
         return response()->json($internship);
     }
@@ -38,7 +38,7 @@ class DataInternshipController extends Controller {
             //upload image
             $image = $req->file('foto_internship');
             $image -> storeAs('public/foto_internship', $image -> hashName());
-            $query = DB::table('data_internship')
+            $query = DB::table('internships')
                 ->insert([
                     'id_internship'     => $req -> id_internship,
                     'nik'               => $req -> nik,
@@ -71,7 +71,7 @@ class DataInternshipController extends Controller {
     }
 
     public function deleteInternship($id) {
-        $query = DB::table('data_internship')
+        $query = DB::table('internships')
             ->where('id_internship', $id)
             ->delete();
 
@@ -85,14 +85,14 @@ class DataInternshipController extends Controller {
     }
 
     public function editInternship($id) {
-        $internship = DB::table('data_internship')->where('id_internship', $id)->get();
+        $internship = DB::table('internships')->where('id_internship', $id)->get();
 
         return view('pembina.internshipEdit', compact('internship'));
     }
 
     public function updateInternship(Request $req) {
         try {
-            $query = DB::table('data_internship')
+            $query = DB::table('internships')
                 ->where('id_internship', $req -> id_internship)
                 ->update([
                     'id_internship'       => $req -> id_internship,
@@ -132,7 +132,7 @@ class DataInternshipController extends Controller {
 
             $image = $req->file('foto_internship');
             $image -> storeAs('public/foto_internship', $image -> hashName());
-            $query = DB::table('data_internship')
+            $query = DB::table('internships')
                 ->where('id_internship', $req -> id_internship)
                 ->update([
                     'id_internship'     => $req -> id_internship,

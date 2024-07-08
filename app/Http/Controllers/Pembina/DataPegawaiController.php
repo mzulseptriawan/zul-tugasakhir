@@ -11,7 +11,7 @@ class DataPegawaiController extends Controller
 {
     public function pegawai() {
         $query = array(
-            'pegawai' => DB::table('data_pegawai')->get());
+            'pegawai' => DB::table('pegawais')->get());
 
         $title = 'Peringatan!';
         $text = "Anda yakin ingin menghapus data ini? Tindakan anda tidak dapat dibatalkan!";
@@ -21,7 +21,7 @@ class DataPegawaiController extends Controller
     }
 
     public function detailPegawai($id) {
-        $pegawai = DB::table('data_pegawai')->where('id_pegawai', $id)->get();
+        $pegawai = DB::table('pegawais')->where('id_pegawai', $id)->get();
 
         return response()->json($pegawai);
     }
@@ -39,7 +39,7 @@ class DataPegawaiController extends Controller
             //upload image
             $image = $req->file('foto_pegawai');
             $image -> storeAs('public/foto_pegawai', $image -> hashName());
-            $query = DB::table('data_pegawai')
+            $query = DB::table('pegawais')
                 ->insert([
                     'id_pegawai'     => $req -> id_pegawai,
                     'nik'            => $req -> nik,
@@ -72,14 +72,14 @@ class DataPegawaiController extends Controller
     }
 
     public function editPegawai($id) {
-        $pegawai = DB::table('data_pegawai')->where('id_pegawai', $id)->get();
+        $pegawai = DB::table('pegawais')->where('id_pegawai', $id)->get();
 
         return view('pembina.pegawaiEdit', compact('pegawai'));
     }
 
     public function updatePegawai(Request $req) {
         try {
-            $query = DB::table('data_pegawai')
+            $query = DB::table('pegawais')
                 ->where('id_pegawai', $req -> id_pegawai)
                 ->update([
                     'id_pegawai'     => $req -> id_pegawai,
@@ -112,7 +112,7 @@ class DataPegawaiController extends Controller
     }
 
     public function deletePegawai($id) {
-        $query = DB::table('data_pegawai')
+        $query = DB::table('pegawais')
             ->where('id_pegawai', $id)
             ->delete();
 
@@ -133,7 +133,7 @@ class DataPegawaiController extends Controller
 
             $image = $req->file('foto_pegawai');
             $image -> storeAs('public/foto_pegawai', $image -> hashName());
-            $query = DB::table('data_pegawai')
+            $query = DB::table('pegawais')
                 ->where('id_pegawai', $req -> id_pegawai)
                 ->update([
                     'id_pegawai'     => $req -> id_pegawai,
