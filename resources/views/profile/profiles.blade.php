@@ -28,7 +28,7 @@
             <h5 class="card-title fw-semibold mb-4">Pusat Akun</h5>
             <div class="card">
                 <div class="card-body">
-                    <form class="col-xl-12 col-lg-12 col-md-12" action="{{ route('updateAccount') }}" method="POST"
+                    <form class="col-xl-12 col-lg-12 col-md-12" action="{{ route('updateProfile') }}" method="POST"
                           enctype="multipart/form-data">
                         @csrf
 
@@ -81,7 +81,7 @@
                                 <img id="preview" src="#" alt="Pratinjau Gambar" style="display: none; margin-top: 10px; max-height: 200px;">
                             </div>
 
-                            <a class="btn btn-danger" href="{{ route('profile') }}">Kembali</a>
+                            <a class="btn btn-danger" href="{{ route('profileIndex') }}">Kembali</a>
                             <button type="submit" class="btn btn-primary">Konfirmasi</button>
                         @endforeach
                     </form>

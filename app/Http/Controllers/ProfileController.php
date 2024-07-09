@@ -12,7 +12,7 @@ class ProfileController extends Controller
         return view('profile.index');
     }
 
-    public function account($id) {
+    public function profile($id) {
         $query  = DB::table('users')
             ->where('id', $id)
             ->get();
@@ -21,7 +21,7 @@ class ProfileController extends Controller
             'dataAccount' => $query
         );
 
-        return view('profile.accounts', $data);
+        return view('profile.profiles', $data);
     }
 
     /**

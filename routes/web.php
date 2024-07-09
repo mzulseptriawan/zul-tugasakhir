@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Pembina\DataInternshipController;
 use App\Http\Controllers\Pembina\DataPegawaiController;
 use App\Http\Controllers\Pembina\PembinaController;
@@ -20,8 +21,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('adIndex');
-    Route::get('/admin/users', [UserManagementController::class, 'user'])->name('adUser');
     // User Management
+    Route::get('/admin/users', [UserManagementController::class, 'user'])->name('adUser');
     Route::get('/admin/users/add', [UserManagementController::class, 'add'])->name('adAdd');
     Route::post('/admin/users/submit', [UserManagementController::class, 'submit'])->name('adSubmit');
     Route::get('/admin/users/delete/{data}', [UserManagementController::class, 'delete'])->name('adDelete');
@@ -55,10 +56,17 @@ Route::middleware(['auth', 'pembina'])->group(function () {
 
 Route::middleware(['auth', 'member'])->group(function () {
     Route::get('/member/dashboard', [MemberController::class, 'index'])->name('mbIndex');
+    // For 'Data Diri'
+    Route::get('/member/accounts/', [MemberController::class, 'account'])->name('account');
+    Route::get('/member/accounts/detail/{id}', [MemberController::class, 'detailAccount'])->name('detailAccount');
+    Route::post('/member/accounts/submit', [MemberController::class, 'submitAccount'])->name('submitAccount');
+    Route::post('/member/accounts/update', [MemberController::class, 'updateAccount'])->name('updateAccount');
+    Route::post('/member/accounts/foto/update', [MemberController::class, 'updateFotoAccount'])->name('updateFotoAccount');
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/settings', [ProfileController::class, 'index'])->name('profile');
-    Route::get('/settings/{id}', [ProfileController::class, 'account'])->name('account');
-    Route::post('/settings/update',[ProfileController::class, 'update'])->name('updateAccount');
+    // For 'Pengaturan Akun'
+    Route::get('/settings', [ProfileController::class, 'index'])->name('profileIndex');
+    Route::get('/settings/{id}', [ProfileController::class, 'profile'])->name('profile');
+    Route::post('/settings/update',[ProfileController::class, 'update'])->name('updateProfile');
 });
