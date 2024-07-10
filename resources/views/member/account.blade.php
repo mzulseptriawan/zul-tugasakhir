@@ -4,7 +4,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title fw-semibold mb-4">Data Internship Anda</h5>
+            <h5 class="card-title fw-semibold mb-4">Isi Data Internship Anda</h5>
             <div class="card">
                 <div class="card-body">
                     <form class="col-xl-12 col-lg-12 col-md-12" action="{{ route('submitAccount') }}" method="POST" enctype="multipart/form-data" id="userForm">

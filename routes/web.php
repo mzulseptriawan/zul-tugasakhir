@@ -58,8 +58,8 @@ Route::middleware(['auth', 'member'])->group(function () {
     Route::get('/member/dashboard', [MemberController::class, 'index'])->name('mbIndex');
     // For 'Data Diri'
     Route::get('/member/accounts/', [MemberController::class, 'account'])->name('account');
-    Route::get('/member/accounts/detail/{id}', [MemberController::class, 'detailAccount'])->name('detailAccount');
     Route::post('/member/accounts/submit', [MemberController::class, 'submitAccount'])->name('submitAccount');
+    Route::get('/member/accounts/detail/{id}', [MemberController::class, 'detailAccount'])->name('detailAccount');
     Route::post('/member/accounts/update', [MemberController::class, 'updateAccount'])->name('updateAccount');
     Route::post('/member/accounts/foto/update', [MemberController::class, 'updateFotoAccount'])->name('updateFotoAccount');
 });

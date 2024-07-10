@@ -74,47 +74,6 @@ class MemberController extends Controller
         return view ('member.accountDetail', $data);
     }
 
-    public function submitInternship(Request $req) {
-        try {
-            $this->validate($req,[
-                'foto_internship'      => 'required|image|mimes:png,jpg,jpeg,webp'
-            ]);
-
-            //upload image
-            $image = $req->file('foto_internship');
-            $image -> storeAs('public/foto_internship', $image -> hashName());
-            $query = DB::table('internships')
-                ->insert([
-                    'id_internship'     => $req -> id_internship,
-                    'nik'               => $req -> nik,
-                    'nama_lengkap'      => $req -> nama_lengkap,
-                    'tempat_lahir'      => $req -> tempat_lahir,
-                    'tanggal_lahir'     => $req -> tanggal_lahir,
-                    'asal_instansi'     => $req -> asal_instansi,
-                    'jenis_kelamin'     => $req -> jenis_kelamin,
-                    'alamat'            => $req -> alamat,
-                    'no_telepon'        => $req -> no_telepon,
-                    'email'             => $req -> email,
-                    'tanggal_masuk'     => $req -> tanggal_masuk,
-                    'posisi'            => $req -> posisi,
-                    'status_internship' => 'Aktif',
-                    'foto_internship'   => $image -> hashName(),
-                    'created_at'        => Carbon::now('Asia/Jakarta'),
-                ]);
-
-            if($query){
-                Alert('Berhasil', 'Data internship berhasil disimpan!','success');
-                return redirect('/pembina/internship');
-            } else {
-                Alert('Gagal', 'Data internship gagal disimpan!','error');
-                return redirect('/pembina/internship/add');
-            }
-        } catch (\Exception $e) {
-            Alert('Data internship gagal disimpan!', 'Error: '.$e->getMessage(),'error');
-            return redirect('/pembina/internship/add');
-        }
-    }
-
     public function updateAccount(Request $req) {
         try {
             $query = DB::table('internships')
@@ -132,7 +91,6 @@ class MemberController extends Controller
                     'email'               => $req -> email,
                     'tanggal_masuk'       => $req -> tanggal_masuk,
                     'posisi'              => $req -> posisi,
-                    'status_internship'   => $req -> status_internship,
                     'updated_at'          => Carbon::now('Asia/Jakarta'),
                 ]);
 

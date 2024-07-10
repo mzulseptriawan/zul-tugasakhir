@@ -93,7 +93,7 @@
 
                                 <div class="col-md-6">
                                     <label for="exampleInputStatusInternship1" class="form-label">Status Internship</label>
-                                    <select name="status_internship" class="form-control">
+                                    <select name="status_internship" class="form-control" disabled>
                                         @if($data -> status_internship == 'Aktif')
                                             <option value="{{ $data -> status_internship }}">{{ $data -> status_internship }}</option>
                                             <option value="Tidak Aktif">Tidak Aktif</option>
