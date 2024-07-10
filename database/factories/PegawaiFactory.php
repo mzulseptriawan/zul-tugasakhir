@@ -18,7 +18,6 @@ class PegawaiFactory extends Factory
             'tempat_lahir' => $this->faker->city,
             'tanggal_lahir' => $this->faker->date(),
             'jenis_kelamin' => $this->faker->randomElement(['Pria', 'Wanita']),
-            'asal_instansi' => $this->faker->company,
             'alamat' => $this->faker->address,
             'no_telepon' => $this->faker->phoneNumber,
             'email' => $this->faker->unique()->safeEmail,

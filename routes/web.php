@@ -33,6 +33,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::middleware(['auth', 'pembina'])->group(function () {
     Route::get('/pembina/dashboard', [PembinaController::class, 'index'])->name('pbIndex');
+    // For 'Data Diri' Pegawai
+    Route::get('/pembina/accounts/', [PembinaController::class, 'pbAccount'])->name('pbAccount');
+    Route::post('/pembina/accounts/submit', [PembinaController::class, 'pbSubmitAccount'])->name('pbSubmitAccount');
+    Route::get('/pembina/accounts/detail/{id}', [PembinaController::class, 'pbDetailAccount'])->name('pbDetailAccount');
+    Route::post('/pembina/accounts/update', [PembinaController::class, 'pbUpdateAccount'])->name('pbUpdateAccount');
+    Route::post('/pembina/accounts/foto/update', [PembinaController::class, 'pbUpdateFotoAccount'])->name('pbUpdateFotoAccount');
     // CRUD Pegawai
     Route::get('/pembina/pegawai', [DataPegawaiController::class, 'pegawai'])->name('pbPegawai');
     Route::get('/pembina/pegawai/detail/{id}', [DataPegawaiController::class, 'detailPegawai'])->name('pbDetailPegawai');
@@ -56,7 +62,7 @@ Route::middleware(['auth', 'pembina'])->group(function () {
 
 Route::middleware(['auth', 'member'])->group(function () {
     Route::get('/member/dashboard', [MemberController::class, 'index'])->name('mbIndex');
-    // For 'Data Diri'
+    // For 'Data Diri' Internship
     Route::get('/member/accounts/', [MemberController::class, 'account'])->name('account');
     Route::post('/member/accounts/submit', [MemberController::class, 'submitAccount'])->name('submitAccount');
     Route::get('/member/accounts/detail/{id}', [MemberController::class, 'detailAccount'])->name('detailAccount');
@@ -65,7 +71,7 @@ Route::middleware(['auth', 'member'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    // For 'Pengaturan Akun'
+    // For 'Pengaturan Akun' All Roles
     Route::get('/settings', [ProfileController::class, 'index'])->name('profileIndex');
     Route::get('/settings/{id}', [ProfileController::class, 'profile'])->name('profile');
     Route::post('/settings/update',[ProfileController::class, 'update'])->name('updateProfile');

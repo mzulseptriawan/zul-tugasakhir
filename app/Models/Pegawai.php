@@ -20,7 +20,6 @@ class Pegawai extends Model
         'tempat_lahir',
         'tanggal_lahir',
         'jenis_kelamin',
-        'asal_instansi',
         'alamat',
         'no_telepon',
         'email',

@@ -46,7 +46,7 @@ class UserSeeder extends Seeder
             $user -> name = "Member",
             $user -> email = "member@gmail.com",
             $user -> password = bcrypt('Qwerty123'),
-            $user -> level = 2,
+            $user -> level = 3,
             $user -> foto = "",
             $user -> no_hp = '089512093389',
             $user -> status = "Aktif",

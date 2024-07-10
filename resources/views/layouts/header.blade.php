@@ -17,14 +17,28 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                         <div class="message-body">
+                            @if(Auth::user() -> level == '3')
                             <a href="{{ route('account', Auth::user() -> id_detail) }}" class="d-flex align-items-center gap-2 dropdown-item">
                                 <i class="ti ti-user-check fs-6"></i>
                                 <p class="mb-0 fs-3">Isi Data Pribadi</p>
                             </a>
-                            <a href="{{ route('detailAccount', Auth::user() -> id_detail) }}" class="d-flex align-items-center gap-2 dropdown-item">
-                                <i class="ti ti-list fs-6"></i>
-                                <p class="mb-0 fs-3">Data Pribadi Anda</p>
+                            @elseif(Auth::user() -> level == '2')<a href="{{ route('pbAccount', Auth::user() -> id_detail) }}" class="d-flex align-items-center gap-2 dropdown-item">
+                                <i class="ti ti-user-check fs-6"></i>
+                                <p class="mb-0 fs-3">Isi Data Pribadi</p>
                             </a>
+                            @else
+                            @endif
+                            @if(Auth::user() -> level == '3')
+                                <a href="{{ route('detailAccount', Auth::user() -> id_detail) }}" class="d-flex align-items-center gap-2 dropdown-item">
+                                    <i class="ti ti-list fs-6"></i>
+                                    <p class="mb-0 fs-3">Data Pribadi Anda</p>
+                                </a>
+                            @elseif(Auth::user() -> level == '2')
+                                <a href="{{ route('pbDetailAccount', Auth::user() -> id_detail) }}" class="d-flex align-items-center gap-2 dropdown-item">
+                                    <i class="ti ti-list fs-6"></i>
+                                    <p class="mb-0 fs-3">Data Pribadi Anda</p>
+                                </a>
+                            @endif
                             <a href="{{ route('profileIndex') }}" class="d-flex align-items-center gap-2 dropdown-item">
                                 <i class="ti ti-settings-2 fs-6"></i>
                                 <p class="mb-0 fs-3">Pengaturan Akun</p>

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->enum('jenis_kelamin', ['Pria', 'Wanita']);
-            $table->string('asal_instansi');
             $table->text('alamat');
             $table->string('no_telepon');
             $table->string('email')->unique();
