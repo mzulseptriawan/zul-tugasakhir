@@ -47,7 +47,6 @@
 
                                     <td class="border-bottom-0">
                                         <img class="img-fluid" width="100" height="100" src="{{ url('storage/foto_internship/' . $data->foto_internship) }}" alt="Foto Internship">
-                                        <span class="fw-normal">{{ $data->posisi }}</span>
                                     </td>
 
                                     <td class="border-bottom-0">
