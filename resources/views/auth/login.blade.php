@@ -50,8 +50,8 @@
                                     <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ old('email') }}" required>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
 
@@ -59,11 +59,11 @@
                                     <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
                                     <label for="password" class="form-label">Password</label>
                                     <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" oninput="validatePassword()" required>
-                                    <div class="invalid-feedback" id="passwordError">
+                                    <div class="invalid-feedback" role="alert" id="passwordError">
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                 </div>
