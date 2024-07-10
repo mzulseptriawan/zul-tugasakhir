@@ -35,8 +35,9 @@ class UserManagementController extends Controller
         $image = $req->file('foto');
         $image -> storeAs('public/foto_akun', $image -> hashName());
         $query = DB::table('users')
-            ->insert([
+            ->insertGetId([
                 'id'         => $req -> id,
+                'id_detail'  => 0, // Dummy
                 'name'       => $req -> name,
                 'email'      => $req -> email,
                 'password'   => bcrypt ($req -> password),
@@ -47,7 +48,11 @@ class UserManagementController extends Controller
                 'created_at' => Carbon::now('Asia/Jakarta'),
             ]);
 
-        if($query){
+        DB::table('users')
+            ->where('id', $query)
+            ->update(['id_detail' => $query]);
+
+        if ($query) {
             Alert('Berhasil', 'Data pengguna berhasil disimpan!','success');
             return redirect('/admin/users');
         } else {
@@ -122,9 +127,9 @@ class UserManagementController extends Controller
                 ->update(['status' => $newStatus]);
 
             if ($query) {
-                return response()->json(['success' => true, 'message' => 'Status admin berhasil diganti!', 'newStatus' => $newStatus]);
+                return response()->json(['success' => true, 'message' => 'Status pengguna berhasil diganti!', 'newStatus' => $newStatus]);
             } else {
-                return response()->json(['success' => false, 'message' => 'Status admin gagal diganti!']);
+                return response()->json(['success' => false, 'message' => 'Status pengguna gagal diganti!']);
             }
         } else {
             return response()->json(['success' => false, 'message' => 'Pengguna tidak ditemukan.']);

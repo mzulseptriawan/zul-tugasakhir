@@ -45,6 +45,7 @@
                                     <option value="">- Pilih Salah Satu -</option>
                                     <option value="1">Admin</option>
                                     <option value="2">Pembina</option>
+                                    <option value="3">Member</option>
                                 </select>
                             </div>
                         </div>
