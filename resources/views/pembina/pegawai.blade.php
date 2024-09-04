@@ -17,28 +17,28 @@
                 <div class="table-responsive">
                     <table class="table text-nowrap mb-0 align-middle">
                         <thead class="text-dark fs-4">
-                            <tr>
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">No</h6>
-                                </th>
+                        <tr>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">No</h6>
+                            </th>
 
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Foto</h6>
-                                </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Foto</h6>
+                            </th>
 
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Nama Lengkap</h6>
-                                </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Nama Lengkap</h6>
+                            </th>
 
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Aksi</h6>
-                                </th>
-                            </tr>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Aksi</h6>
+                            </th>
+                        </tr>
                         </thead>
 
                         <tbody>
                         @php $no = 1; @endphp
-                        @if($pegawai)
+                        @if(count($pegawai) > 0)
                             @foreach($pegawai as $data)
                                 <tr>
                                     <td class="border-bottom-0">
@@ -77,6 +77,10 @@
                                     </td>
                                 </tr>
                             @endforeach
+                        @else
+                            <tr>
+                                <td colspan="4" class="text-center">Data Pegawai Kosong</td>
+                            </tr>
                         @endif
                         </tbody>
                     </table>
@@ -106,7 +110,6 @@
     </div>
 
     <script>
-
         document.addEventListener('DOMContentLoaded', function () {
             class EmployeeDetailHandler {
                 constructor() {
@@ -148,19 +151,19 @@
 
                 displayEmployeeDetail(data) {
                     this.pegawaiDetail.innerHTML = `
-                <p><strong>NIK:</strong> ${data[0].nik}</p>
-                <p><strong>Nama:</strong> ${data[0].nama_lengkap}</p>
-                <p><strong>Tempat Lahir:</strong> ${data[0].tempat_lahir}</p>
-                <p><strong>Tanggal Lahir:</strong> ${data[0].tanggal_lahir}</p>
-                <p><strong>Jenis Kelamin:</strong> ${data[0].jenis_kelamin}</p>
-                <p><strong>Alamat:</strong> ${data[0].alamat}</p>
-                <p><strong>No Telepon:</strong> ${data[0].no_telepon}</p>
-                <p><strong>Email:</strong> ${data[0].email}</p>
-                <p><strong>Tanggal Masuk:</strong> ${data[0].tanggal_masuk}</p>
-                <p><strong>Posisi:</strong> ${data[0].posisi}</p>
-                <p><strong>Gaji:</strong> ${this.formatRupiah(data[0].gaji, 'Rp. ')}</p>
-                <p><strong>Status Pegawai:</strong> ${data[0].status_pegawai}</p>
-            `;
+                        <p><strong>NIK:</strong> ${data[0].nik}</p>
+                        <p><strong>Nama:</strong> ${data[0].nama_lengkap}</p>
+                        <p><strong>Tempat Lahir:</strong> ${data[0].tempat_lahir}</p>
+                        <p><strong>Tanggal Lahir:</strong> ${data[0].tanggal_lahir}</p>
+                        <p><strong>Jenis Kelamin:</strong> ${data[0].jenis_kelamin}</p>
+                        <p><strong>Alamat:</strong> ${data[0].alamat}</p>
+                        <p><strong>No Telepon:</strong> ${data[0].no_telepon}</p>
+                        <p><strong>Email:</strong> ${data[0].email}</p>
+                        <p><strong>Tanggal Masuk:</strong> ${data[0].tanggal_masuk}</p>
+                        <p><strong>Posisi:</strong> ${data[0].posisi}</p>
+                        <p><strong>Gaji:</strong> ${this.formatRupiah(data[0].gaji, 'Rp. ')}</p>
+                        <p><strong>Status Pegawai:</strong> ${data[0].status_pegawai}</p>
+                    `;
                     this.detailModal.show();
                 }
 
@@ -183,6 +186,5 @@
 
             new EmployeeDetailHandler();
         });
-
     </script>
 @endsection

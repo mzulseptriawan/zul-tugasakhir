@@ -107,7 +107,7 @@
                             <span>
                                 <i class="ti ti-pennant"></i>
                             </span>
-                            <span class="hide-menu">Rekap Absensi</span>
+                            <span class="hide-menu">Data Absensi</span>
                         </a>
                     </li>
 
@@ -116,7 +116,7 @@
                             <span>
                                 <i class="ti ti-photo-edit"></i>
                             </span>
-                            <span class="hide-menu">Status Absensi</span>
+                            <span class="hide-menu">Laporan Absensi</span>
                         </a>
                     </li>
                     {{-- END MENU FOR PEMBINA --}}

@@ -8,7 +8,7 @@
         .toggle-password {
             position: absolute;
             top: 0%;
-            right: 820px;
+            right: 790px;
             border: none;
             background: none;
             cursor: pointer;
@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="mb-4 password-wrapper">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <label for="exampleInputPassword1" class="form-label">Password Baru</label>
                                 <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" oninput="validatePassword()" required>
                                 <div class="invalid-feedback" id="passwordError">
                                     @error('password')
