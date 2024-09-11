@@ -1,191 +1,134 @@
 @extends('layouts.template')
 @section('title', 'Dashboard')
 @section('content')
-        <div class="col-lg-12 d-flex align-items-stretch">
-            <div class="card w-100">
-                <div class="card-body p-4">
-                    <h5 class="card-title fw-semibold mb-4">Daftar Pengguna</h5>
-                    <div class="table-responsive">
-                        <table class="table text-nowrap mb-0 align-middle">
-                            <thead class="text-dark fs-4">
-                            <tr>
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">No</h6>
-                                </th>
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Nama</h6>
-                                </th>
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Pengerjaan</h6>
-                                </th>
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Prioritas</h6>
-                                </th>
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Status</h6>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="border-bottom-0"><h6 class="fw-semibold mb-0">1</h6></td>
-                                <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">Sunil Joshi</h6>
-                                    <span class="fw-normal">Web Designer</span>
-                                </td>
-                                <td class="border-bottom-0">
-                                    <p class="mb-0 fw-normal">Elite Admin</p>
-                                </td>
-                                <td class="border-bottom-0">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span class="badge bg-primary rounded-3 fw-semibold">Low</span>
-                                    </div>
-                                </td>
-                                <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0 fs-4">$3.9</h6>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="border-bottom-0"><h6 class="fw-semibold mb-0">2</h6></td>
-                                <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">Andrew McDownland</h6>
-                                    <span class="fw-normal">Project Manager</span>
-                                </td>
-                                <td class="border-bottom-0">
-                                    <p class="mb-0 fw-normal">Real Homes WP Theme</p>
-                                </td>
-                                <td class="border-bottom-0">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span class="badge bg-secondary rounded-3 fw-semibold">Medium</span>
-                                    </div>
-                                </td>
-                                <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0 fs-4">$24.5k</h6>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="border-bottom-0"><h6 class="fw-semibold mb-0">3</h6></td>
-                                <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">Christopher Jamil</h6>
-                                    <span class="fw-normal">Project Manager</span>
-                                </td>
-                                <td class="border-bottom-0">
-                                    <p class="mb-0 fw-normal">MedicalPro WP Theme</p>
-                                </td>
-                                <td class="border-bottom-0">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span class="badge bg-danger rounded-3 fw-semibold">High</span>
-                                    </div>
-                                </td>
-                                <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0 fs-4">$12.8k</h6>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="border-bottom-0"><h6 class="fw-semibold mb-0">4</h6></td>
-                                <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">Nirav Joshi</h6>
-                                    <span class="fw-normal">Frontend Engineer</span>
-                                </td>
-                                <td class="border-bottom-0">
-                                    <p class="mb-0 fw-normal">Hosting Press HTML</p>
-                                </td>
-                                <td class="border-bottom-0">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span class="badge bg-success rounded-3 fw-semibold">Critical</span>
-                                    </div>
-                                </td>
-                                <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0 fs-4">$2.4k</h6>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title fw-semibold mb-4">Waktu Sekarang</h2>
+            <h3 id="clock"></h3>
+            <p id="calendar"></p>
         </div>
     </div>
+
     <div class="row">
-        <div class="col-sm-6 col-xl-3">
-            <div class="card overflow-hidden rounded-2">
-                <div class="position-relative">
-                    <a href="javascript:void(0)"><img src="../assets/admin/assets/images/products/s4.jpg" class="card-img-top rounded-0" alt="..."></a>
-                    <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-                <div class="card-body pt-3 p-4">
-                    <h6 class="fw-semibold fs-4">Boat Headphone</h6>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h6 class="fw-semibold fs-4 mb-0">$50 <span class="ms-2 fw-normal text-muted fs-3"><del>$65</del></span></h6>
-                        <ul class="list-unstyled d-flex align-items-center mb-0">
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        </ul>
+        <!-- Card for Pegawai -->
+        <div class="col-lg-6 d-flex align-items-stretch">
+            <div class="card w-100 border-primary">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="avatar-sm bg-primary rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="ti ti-user text-white fs-5"></i>
+                        </div>
+                        <h5 class="card-title fw-semibold ms-3 mb-0">Rekapitulasi Absensi Pegawai</h5>
                     </div>
+                    <!-- Calendar and Clock -->
+                    <div class="mb-4">
+                        <p class="mb-0" id="calendar-pegawai"></p>
+                        <p id="clock-pegawai"></p>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title text-primary">Hadir</h6>
+                                    <h4 class="fw-bold text-primary">$totalHadirPegawai</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title text-danger">Sakit</h6>
+                                    <h4 class="fw-bold text-danger">$totalSakitPegawai</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title text-warning">Izin</h6>
+                                    <h4 class="fw-bold text-warning">$totalIzinPegawai</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title text-secondary">Alfa</h6>
+                                    <h4 class="fw-bold text-secondary">$totalAlfaPegawai</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted mt-2">Total Pegawai yang melakukan absensi</p>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card overflow-hidden rounded-2">
-                <div class="position-relative">
-                    <a href="javascript:void(0)"><img src="../assets/admin/assets/images/products/s5.jpg" class="card-img-top rounded-0" alt="..."></a>
-                    <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-                <div class="card-body pt-3 p-4">
-                    <h6 class="fw-semibold fs-4">MacBook Air Pro</h6>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h6 class="fw-semibold fs-4 mb-0">$650 <span class="ms-2 fw-normal text-muted fs-3"><del>$900</del></span></h6>
-                        <ul class="list-unstyled d-flex align-items-center mb-0">
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        </ul>
+
+        <!-- Card for Internship -->
+        <div class="col-lg-6 d-flex align-items-stretch">
+            <div class="card w-100 border-success">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="avatar-sm bg-success rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="ti ti-user text-white fs-5"></i>
+                        </div>
+                        <h5 class="card-title fw-semibold ms-3 mb-0">Rekapitulasi Absensi Internship</h5>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card overflow-hidden rounded-2">
-                <div class="position-relative">
-                    <a href="javascript:void(0)"><img src="../assets/admin/assets/images/products/s7.jpg" class="card-img-top rounded-0" alt="..."></a>
-                    <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-                <div class="card-body pt-3 p-4">
-                    <h6 class="fw-semibold fs-4">Red Valvet Dress</h6>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h6 class="fw-semibold fs-4 mb-0">$150 <span class="ms-2 fw-normal text-muted fs-3"><del>$200</del></span></h6>
-                        <ul class="list-unstyled d-flex align-items-center mb-0">
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        </ul>
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title text-primary">Hadir</h6>
+                                    <h4 class="fw-bold text-primary">$totalHadirInternship</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title text-danger">Sakit</h6>
+                                    <h4 class="fw-bold text-danger">$totalSakitInternship</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title text-warning">Izin</h6>
+                                    <h4 class="fw-bold text-warning">$totalIzinInternship</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title text-secondary">Alfa</h6>
+                                    <h4 class="fw-bold text-secondary">$totalAlfaInternship</h4>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card overflow-hidden rounded-2">
-                <div class="position-relative">
-                    <a href="javascript:void(0)"><img src="../assets/admin/assets/images/products/s11.jpg" class="card-img-top rounded-0" alt="..."></a>
-                    <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-                <div class="card-body pt-3 p-4">
-                    <h6 class="fw-semibold fs-4">Cute Soft Teddybear</h6>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h6 class="fw-semibold fs-4 mb-0">$285 <span class="ms-2 fw-normal text-muted fs-3"><del>$345</del></span></h6>
-                        <ul class="list-unstyled d-flex align-items-center mb-0">
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                            <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        </ul>
-                    </div>
+                    <p class="text-muted mt-2">Total Internship yang melakukan absensi</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function updateTime() {
+            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const now = new Date().toLocaleTimeString('id-ID', options);
+            document.getElementById('clock').textContent = now;
+        }
+
+        function updateDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const now = new Date().toLocaleDateString('id-ID', options);
+            document.getElementById('calendar').textContent = now;
+        }
+
+        updateDate();
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
 @endsection
