@@ -147,6 +147,8 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\DataTables\HtmlServiceProvider::class,
     ])->toArray(),
 
     /*

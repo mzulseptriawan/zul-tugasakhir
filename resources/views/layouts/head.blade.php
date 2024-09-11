@@ -8,4 +8,5 @@
     <link href="{{ asset('/dist/css/sweetalert.css') }}" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="{{ asset('https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 </head>

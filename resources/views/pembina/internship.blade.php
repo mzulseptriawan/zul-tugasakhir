@@ -15,7 +15,8 @@
                 <h5 class="card-title fw-semibold mb-4">Data Internship</h5>
                 <a class="btn btn-primary" href="{{ route('pbAddInternship') }}">Tambahkan Internship</a>
                 <div class="table-responsive">
-                    <table class="table text-nowrap mb-0 align-middle">
+                    <br>
+                    <table id="example" class="table text-nowrap mb-0 align-middle">
                         <thead class="text-dark fs-4">
                         <tr>
                             <th class="border-bottom-0">
