@@ -35,7 +35,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth', 'pembina'])->group(function () {
     Route::get('/pembina/dashboard', [PembinaController::class, 'index'])->name('pbIndex');
     // For 'Data Diri' Pegawai
-    Route::get('/pembina/accounts/', [PembinaController::class, 'pbAccount'])->name('pbAccount');
+    Route::get('/pembina/accounts/{id}', [PembinaController::class, 'pbAccount'])->name('pbAccount');
     Route::post('/pembina/accounts/submit', [PembinaController::class, 'pbSubmitAccount'])->name('pbSubmitAccount');
     Route::get('/pembina/accounts/detail/{id}', [PembinaController::class, 'pbDetailAccount'])->name('pbDetailAccount');
     Route::post('/pembina/accounts/update', [PembinaController::class, 'pbUpdateAccount'])->name('pbUpdateAccount');
@@ -60,7 +60,7 @@ Route::middleware(['auth', 'pembina'])->group(function () {
     Route::post('/pembina/internship/foto/update', [DataInternshipController::class, 'updateFotoInternship'])->name('pbUpdateFotoInternship');
     // Data Absensi
     Route::get('/pembina/absensi', [DataAbsensiController::class, 'absensi'])->name('pbAbsensi');
-
+    Route::get('/pembina/absensi/delete/{id}', [DataAbsensiController::class, 'deleteAbsensi'])->name('pbDeleteAbsensi');
 });
 
 Route::middleware(['auth', 'member'])->group(function () {

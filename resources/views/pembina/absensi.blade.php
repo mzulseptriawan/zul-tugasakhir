@@ -24,6 +24,9 @@
                                 <h6 class="fw-semibold mb-0">Nama</h6>
                             </th>
                             <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Tanggal Masuk</h6>
+                            </th>
+                            <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Waktu Masuk</h6>
                             </th>
                             <th class="border-bottom-0">
@@ -31,6 +34,9 @@
                             </th>
                             <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Foto Masuk</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Tanggal Keluar</h6>
                             </th>
                             <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Waktu Keluar</h6>
@@ -64,10 +70,16 @@
                                     <h6 class="fw-semibold mb-0">{{ $data -> waktu_masuk }}</h6>
                                 </td>
                                 <td class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">{{ $data -> tanggal_masuk }}</h6>
+                                </td>
+                                <td class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">{{ $data -> lokasi_masuk }}</h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <img class="img-fluid" width="100" height="100" src="{{ url('storage/foto_absensi/' . $data->foto_masuk) }}" alt="Foto Internship">
+                                    <img class="img-fluid" width="100" height="100" src="{{ url('storage/foto_absensi/' . $data->foto_masuk) }}" alt="Foto Masuk">
+                                </td>
+                                <td class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">{{ $data -> tanggal_keluar }}</h6>
                                 </td>
                                 <td class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">{{ $data -> waktu_keluar }}</h6>
@@ -76,7 +88,7 @@
                                     <h6 class="fw-semibold mb-0">{{ $data -> lokasi_keluar }}</h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <img class="img-fluid" width="100" height="100" src="{{ url('storage/foto_absensi/' . $data->foto_keluar) }}" alt="Foto Internship">
+                                    <img class="img-fluid" width="100" height="100" src="{{ url('storage/foto_absensi/' . $data->foto_keluar) }}" alt="Foto Keluar">
                                 </td>
                                 <td class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">{{ $data -> keterangan }}</h6>
@@ -87,17 +99,9 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                                         <div class="message-body">
-                                            <a class="d-flex align-items-center gap-2 dropdown-item btn-detail dropdown-item" href="javascript:void(0)" data-id-internship="{{ $data->id_internship }}">
-                                                <i class="ti ti-eye fs-6"></i>
-                                                <p class="mb-0 fs-3">Lihat Detail</p>
-                                            </a>
-                                            <a href="{{ route('pbDeleteInternship', $data->id_internship) }}" class="d-flex align-items-center gap-2 dropdown-item" data-confirm-delete="true">
+                                            <a href="{{ route('pbDeleteAbsensi', $data->id_internship) }}" class="d-flex align-items-center gap-2 dropdown-item" data-confirm-delete="true">
                                                 <i class="ti ti-trash fs-6"></i>
                                                 <p class="mb-0 fs-3">Hapus Data</p>
-                                            </a>
-                                            <a href="{{ route('pbEditInternship', $data->id_internship) }}" class="d-flex align-items-center gap-2 dropdown-item">
-                                                <i class="ti ti-pencil fs-6"></i>
-                                                <p class="mb-0 fs-3">Edit Data</p>
                                             </a>
                                         </div>
                                     </div>

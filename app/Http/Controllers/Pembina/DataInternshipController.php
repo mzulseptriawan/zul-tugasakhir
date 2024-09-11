@@ -38,9 +38,11 @@ class DataInternshipController extends Controller {
             //upload image
             $image = $req->file('foto_internship');
             $image -> storeAs('public/foto_internship', $image -> hashName());
+            $count = DB::table('users')->count();
             $query = DB::table('internships')
                 ->insert([
                     'id_internship'     => $req -> id_internship,
+                    'id_detail'         => $count,
                     'nik'               => $req -> nik,
                     'nama_lengkap'      => $req -> nama_lengkap,
                     'tempat_lahir'      => $req -> tempat_lahir,

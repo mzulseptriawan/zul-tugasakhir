@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@section('title', 'Tambah Internship')
+@section('title', 'Tambah Data Diri')
 
 @section('content')
     <div class="card">

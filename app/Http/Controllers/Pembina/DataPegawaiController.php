@@ -39,9 +39,11 @@ class DataPegawaiController extends Controller
             //upload image
             $image = $req->file('foto_pegawai');
             $image -> storeAs('public/foto_pegawai', $image -> hashName());
+            $count = DB::table('users')->count();
             $query = DB::table('pegawais')
                 ->insert([
                     'id_pegawai'     => $req -> id_pegawai,
+                    'id_detail'      => $count,
                     'nik'            => $req -> nik,
                     'nama_lengkap'   => $req -> nama_lengkap,
                     'tempat_lahir'   => $req -> tempat_lahir,

@@ -10,7 +10,14 @@ use Illuminate\Support\Facades\DB;
 class PembinaController extends Controller
 {
     public function index() {
-        return view('pembina.index');
+        $data = array(
+            'totalHadirAbsensi' => DB::table('absensis')->where('jenis_absensi', 'Hadir')->count(),
+            'totalSakitAbsensi' => DB::table('absensis')->where('jenis_absensi', 'Sakit')->count(),
+            'totalIzinAbsensi' => DB::table('absensis')->where('jenis_absensi', 'Izin')->count(),
+            'totalAlfaAbsensi' => DB::table('absensis')->where('jenis_absensi', 'Alfa')->count()
+        );
+
+        return view('pembina.index', $data);
     }
 
     public function pbAccount() {
