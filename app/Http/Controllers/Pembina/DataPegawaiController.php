@@ -27,7 +27,12 @@ class DataPegawaiController extends Controller
     }
 
     public function addPegawai() {
-        return view('pembina.pegawaiAdd');
+        $usersDetail = DB::table('users')->where('level', '2')->get();
+        $query = array(
+            'idDetail' => $usersDetail,
+        );
+
+        return view('pembina.pegawaiAdd', $query);
     }
 
     public function submitPegawai(Request $req) {
@@ -39,11 +44,10 @@ class DataPegawaiController extends Controller
             //upload image
             $image = $req->file('foto_pegawai');
             $image -> storeAs('public/foto_pegawai', $image -> hashName());
-            $count = DB::table('users')->count();
             $query = DB::table('pegawais')
                 ->insert([
                     'id_pegawai'     => $req -> id_pegawai,
-                    'id_detail'      => $count,
+                    'id_detail'      => $req -> id_detail,
                     'nik'            => $req -> nik,
                     'nama_lengkap'   => $req -> nama_lengkap,
                     'tempat_lahir'   => $req -> tempat_lahir,
@@ -74,9 +78,17 @@ class DataPegawaiController extends Controller
     }
 
     public function editPegawai($id) {
-        $pegawai = DB::table('pegawais')->where('id_pegawai', $id)->get();
+        $query = array(
+            'pegawai' => DB::table('pegawais')->where('id_pegawai', $id)->get(),
+            'idDetail' => DB::table('users')->where('level', '2')->get(),
+            'nameDetail' => DB::table('pegawais')
+                ->join('users', 'users.id_detail', '=', 'pegawais.id_detail')
+                ->select('users.name', 'pegawais.id_detail')
+                ->where('id_pegawai', $id)
+                ->get(),
+        );
 
-        return view('pembina.pegawaiEdit', compact('pegawai'));
+        return view('pembina.pegawaiEdit', $query);
     }
 
     public function updatePegawai(Request $req) {
@@ -85,6 +97,7 @@ class DataPegawaiController extends Controller
                 ->where('id_pegawai', $req -> id_pegawai)
                 ->update([
                     'id_pegawai'     => $req -> id_pegawai,
+                    'id_detail'      => $req -> id_detail,
                     'nik'            => $req -> nik,
                     'nama_lengkap'   => $req -> nama_lengkap,
                     'tempat_lahir'   => $req -> tempat_lahir,
@@ -96,7 +109,7 @@ class DataPegawaiController extends Controller
                     'tanggal_masuk'  => $req -> tanggal_masuk,
                     'posisi'         => $req -> posisi,
                     'gaji'           => $req -> gaji,
-                    'status_pegawai'   => $req -> status_pegawai,
+                    'status_pegawai' => $req -> status_pegawai,
                     'updated_at'     => Carbon::now('Asia/Jakarta'),
                 ]);
 

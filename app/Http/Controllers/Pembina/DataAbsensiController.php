@@ -32,6 +32,10 @@ class DataAbsensiController extends Controller
         }
     }
 
+    public function laporan() {
+        return view('pembina.laporan');
+    }
+
     public function cetakLaporanPerorang(Request $req) {
         $id = $req -> id_absensi;
         $bulan = $req -> bulan;

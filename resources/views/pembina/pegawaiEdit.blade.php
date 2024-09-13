@@ -99,6 +99,18 @@
                                         <input type="text" value="{{ $data -> gaji }}" name="gaji" class="form-control" id="exampleInputHarga" oninput="formatRupiah(this)" aria-describedby="gajiHelp" maxlength="20" required>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <label for="exampleInputJK1" class="form-label">Hubungkan dengan Akun</label>
+                                    <select name="id_detail" class="form-control">
+                                        <option value="">- Tidak Ada/Pilih Salah Satu -</option>
+                                            @foreach($idDetail as $users)
+                                                <option value="{{ $users->id_detail }}">{{ $users->name }}</option>
+                                            @endforeach
+                                    </select>
+                                    @foreach($nameDetail as $nameUsers)
+                                        <p class="text-muted mt-2">Saat ini pegawai terhubung dengan akun {{ $nameUsers -> name }}</p>
+                                    @endforeach
+                                </div>
                             </div>
 
                             <div class="d-flex justify-content-end">

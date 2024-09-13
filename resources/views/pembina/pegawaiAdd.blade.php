@@ -14,12 +14,12 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="exampleInputNik1" class="form-label">NIK</label>
-                                <input type="number" name="nik" class="form-control" id="exampleInputNik1" oninput="validateNikLength(this)" aria-describedby="nikHelp" maxlength="16" required>
+                                <input type="number" name="nik" class="form-control" id="exampleInputNik1" oninput="validateNikLength(this)" maxlength="16" required>
                                 <div class="invalid-feedback" id="nikError">NIK harus terdiri dari 16 karakter.</div>
                             </div>
                             <div class="col-md-6">
                                 <label for="exampleInputName1" class="form-label">Nama Lengkap</label>
-                                <input type="text" name="nama_lengkap" class="form-control" id="exampleInputName1" aria-describedby="nameHelp" required>
+                                <input type="text" name="nama_lengkap" class="form-control" id="exampleInputName1" required>
                             </div>
                         </div>
 
@@ -30,7 +30,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="exampleInputTglLahir1" class="form-label">Tanggal Lahir</label>
-                                <input type="date" name="tanggal_lahir" class="form-control" id="exampleInputTglLahir1" aria-describedby="emailHelp" required>
+                                <input type="date" name="tanggal_lahir" class="form-control" id="exampleInputTglLahir1" required>
                             </div>
                         </div>
 
@@ -63,7 +63,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="exampleInputTglMasuk1" class="form-label">Tanggal Masuk</label>
-                                <input type="date" name="tanggal_masuk" class="form-control" id="exampleInputTglMasuk1" aria-describedby="emailHelp" required>
+                                <input type="date" name="tanggal_masuk" class="form-control" id="exampleInputTglMasuk1" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="exampleInputPosisi1" class="form-label">Posisi</label>
@@ -76,13 +76,23 @@
                                 <label for="exampleInputGaji1" class="form-label">Gaji</label>
                                 <div class="input-group">
                                     <span class="input-group-text">Rp.</span>
-                                    <input type="text" name="gaji" class="form-control" id="exampleInputHarga" oninput="formatRupiah(this)" aria-describedby="gajiHelp" maxlength="20" required>
+                                    <input type="text" name="gaji" class="form-control" id="exampleInputHarga" oninput="formatRupiah(this)" maxlength="20" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="exampleInputFoto1" class="form-label">Foto</label>
                                 <input type="file" name="foto_pegawai" class="form-control" id="exampleInputFoto1" onchange="previewImage(event)" required>
                             </div>
+                        </div>
+
+                        <div class="row mb-6">
+                            <label for="exampleInputJK1" class="form-label">Hubungkan dengan Akun</label>
+                            <select name="id_detail" class="form-control">
+                                <option value="">- Tidak Ada/Pilih Salah Satu -</option>
+                                @foreach($idDetail as $data)
+                                    <option value="{{ $data->id_detail }}">{{ $data->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="row mb-3 justify-content-center">
@@ -106,27 +116,16 @@
             const nikError = document.getElementById('nikError');
             let value = input.value;
 
-            // Membatasi input hanya sampai 16 karakter
             if (value.length > 16) {
                 input.value = value.slice(0, 16);
             }
 
-            // Menampilkan atau menyembunyikan pesan error
             if (input.value.length !== 16) {
                 input.classList.add('is-invalid');
                 nikError.style.display = 'block';
             } else {
                 input.classList.remove('is-invalid');
                 nikError.style.display = 'none';
-            }
-        }
-
-        function togglePassword() {
-            var passwordField = document.getElementById('exampleInputPassword1');
-            if (document.getElementById('exampleCheck1').checked) {
-                passwordField.type = 'text';
-            } else {
-                passwordField.type = 'password';
             }
         }
 
@@ -154,23 +153,6 @@
             }
         }
 
-        function validatePassword() {
-            var passwordField = document.getElementById('exampleInputPassword1');
-            var password = passwordField.value;
-            var passwordError = document.getElementById('passwordError');
-            var regex = /^.{8,}$/;
-
-            if (!regex.test(password)) {
-                passwordError.textContent = "Password harus minimal 8 karakter.";
-                passwordField.classList.add('is-invalid');
-                return false;
-            } else {
-                passwordError.textContent = "";
-                passwordField.classList.remove('is-invalid');
-                return true;
-            }
-        }
-
         function formatRupiah(input) {
             var value = input.value.replace(/[^,\d]/g, '');
             var split = value.split(',');
@@ -185,25 +167,5 @@
 
             input.value = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
         }
-
-        function removeFormatRupiah() {
-            var input = document.getElementById('exampleInputHarga');
-            input.value = input.value.replace(/\./g, '');
-        }
-
-        document.getElementById('exampleInputNik1').addEventListener('input', function() {
-            validateNikLength(this);
-        });
-
-        document.getElementById('userForm').addEventListener('submit', function (e) {
-            const nikInput = document.getElementById('exampleInputNik1');
-            if (!validatePassword()) {
-                e.preventDefault();
-            }
-            if (nikInput.value.length !== 16) {
-                e.preventDefault();
-                validateNikLength(nikInput);
-            }
-        });
     </script>
 @endsection
