@@ -83,6 +83,16 @@
                             </div>
                         </div>
 
+                        <div class="row mb-6">
+                            <label for="exampleInputJK1" class="form-label">Hubungkan dengan Akun</label>
+                            <select name="id_detail" class="form-control">
+                                <option value="">- Tidak Ada/Pilih Salah Satu -</option>
+                                @foreach($idDetail as $data)
+                                    <option value="{{ $data->id_detail }}">{{ $data->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="row mb-3 justify-content-center">
                             <div class="col-md-6 text-center">
                                 <img id="preview" src="#" alt="Pratinjau Gambar" style="display: none; margin-top: 10px; max-height: 200px;">

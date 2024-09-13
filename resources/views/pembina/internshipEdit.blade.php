@@ -80,7 +80,7 @@
                                 <div class="col-md-6">
                                     <label for="exampleInputAsal1" class="form-label">Asal Instansi</label>
                                     <div class="input-group">
-                                        <input type="text" value="{{ $data -> asal_instansi }}" name="gaji" class="form-control" id="exampleInputHarga" required>
+                                        <input type="text" value="{{ $data -> asal_instansi }}" name="asal_instansi" class="form-control" id="exampleInputAsal" required>
                                     </div>
                                 </div>
 
@@ -96,6 +96,19 @@
                                         @endif
                                     </select>
                                 </div>
+                            </div>
+
+                            <div class="row mb-6">
+                                <label for="exampleInputJK1" class="form-label">Hubungkan dengan Akun</label>
+                                <select name="id_detail" class="form-control">
+                                    <option value="">- Tidak Ada/Pilih Salah Satu -</option>
+                                    @foreach($idDetail as $users)
+                                        <option value="{{ $users->id_detail }}">{{ $users->name }}</option>
+                                    @endforeach
+                                </select>
+                                @foreach($nameDetail as $nameUsers)
+                                    <p class="text-muted mt-2">Saat ini internship terhubung dengan akun {{ $nameUsers -> name }}</p>
+                                @endforeach
                             </div>
 
                             <div class="d-flex justify-content-end">

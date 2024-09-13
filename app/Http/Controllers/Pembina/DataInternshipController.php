@@ -26,7 +26,12 @@ class DataInternshipController extends Controller {
     }
 
     public function addInternship() {
-        return view('pembina.internshipAdd');
+        $usersDetail = DB::table('users')->where('level', '3')->get();
+        $query = array(
+            'idDetail' => $usersDetail,
+        );
+
+        return view('pembina.internshipAdd', $query);
     }
 
     public function submitInternship(Request $req) {
@@ -38,11 +43,10 @@ class DataInternshipController extends Controller {
             //upload image
             $image = $req->file('foto_internship');
             $image -> storeAs('public/foto_internship', $image -> hashName());
-            $count = DB::table('users')->count();
             $query = DB::table('internships')
                 ->insert([
                     'id_internship'     => $req -> id_internship,
-                    'id_detail'         => $count,
+                    'id_detail'         => $req -> id_detail,
                     'nik'               => $req -> nik,
                     'nama_lengkap'      => $req -> nama_lengkap,
                     'tempat_lahir'      => $req -> tempat_lahir,
@@ -87,9 +91,17 @@ class DataInternshipController extends Controller {
     }
 
     public function editInternship($id) {
-        $internship = DB::table('internships')->where('id_internship', $id)->get();
+        $query = array(
+            'internship' => DB::table('internships')->where('id_internship', $id)->get(),
+            'idDetail' => DB::table('users')->where('level', '3')->get(),
+            'nameDetail' => DB::table('internships')
+                ->join('users', 'users.id_detail', '=', 'internships.id_detail')
+                ->select('users.name', 'internships.id_detail')
+                ->where('id_internship', $id)
+                ->get(),
+        );
 
-        return view('pembina.internshipEdit', compact('internship'));
+        return view('pembina.internshipEdit', $query);
     }
 
     public function updateInternship(Request $req) {
@@ -98,6 +110,7 @@ class DataInternshipController extends Controller {
                 ->where('id_internship', $req -> id_internship)
                 ->update([
                     'id_internship'       => $req -> id_internship,
+                    'id_detail'           => $req -> id_detail,
                     'nik'                 => $req -> nik,
                     'nama_lengkap'        => $req -> nama_lengkap,
                     'tempat_lahir'        => $req -> tempat_lahir,
