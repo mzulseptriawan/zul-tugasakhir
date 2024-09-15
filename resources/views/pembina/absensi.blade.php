@@ -67,7 +67,7 @@
                                     <span class="fw-normal">{{ $data->posisi }}</span>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">{{ $data -> waktu_masuk }}</h6>
+                                    <h6 class="fw-semibold mb-0">{{ $data -> jam_masuk }}</h6>
                                 </td>
                                 <td class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">{{ $data -> tanggal_masuk }}</h6>
@@ -82,7 +82,7 @@
                                     <h6 class="fw-semibold mb-0">{{ $data -> tanggal_keluar }}</h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">{{ $data -> waktu_keluar }}</h6>
+                                    <h6 class="fw-semibold mb-0">{{ $data -> jam_keluar }}</h6>
                                 </td>
                                 <td class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">{{ $data -> lokasi_keluar }}</h6>
@@ -99,7 +99,7 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                                         <div class="message-body">
-                                            <a href="{{ route('pbDeleteAbsensi', $data->id_internship) }}" class="d-flex align-items-center gap-2 dropdown-item" data-confirm-delete="true">
+                                            <a href="{{ route('pbDeleteAbsensi', $data -> id_internship) }}" class="d-flex align-items-center gap-2 dropdown-item" data-confirm-delete="true">
                                                 <i class="ti ti-trash fs-6"></i>
                                                 <p class="mb-0 fs-3">Hapus Data</p>
                                             </a>

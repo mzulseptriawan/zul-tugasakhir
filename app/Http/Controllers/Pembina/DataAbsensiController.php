@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Pembina;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class DataAbsensiController extends Controller
 {
@@ -33,12 +37,29 @@ class DataAbsensiController extends Controller
     }
 
     public function laporan() {
-        return view('pembina.laporan');
+        $namaBulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        $pegawai = DB::table('internships')->orderBy('nama_lengkap')->get();
+
+        return view('pembina.laporan', compact('namaBulan', 'pegawai'));
     }
 
-    public function cetakLaporanPerorang(Request $req) {
-        $id = $req -> id_absensi;
-        $bulan = $req -> bulan;
-        $tahun = $req -> tahun;
+    public function cetakLaporan(Request $req) {
+        $id_detail  = $req  ->  id_detail;
+        $bulan      = $req  ->  bulan;
+        $tahun      = $req  ->  tahun;
+        $namaBulan  = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+        $internship = DB::table('absensis')
+            ->join('internships', 'absensis.id_detail', '=', 'internships.id_detail')
+            ->select('absensis.*', 'internships.*')
+            ->first();
+        $absensi    = DB::table('absensis')
+            ->where('id_detail', $id_detail)
+            ->whereRaw('MONTH(tanggal_masuk)="'.$bulan.'"')
+            ->whereRaw('YEAR(tanggal_masuk)="'.$tahun.'"')
+            ->orderBy('tanggal_masuk')
+            ->get();
+
+        return view('pembina.cetaklaporan', compact('bulan', 'tahun', 'namaBulan', 'internship','absensi'));
     }
 }

@@ -62,6 +62,7 @@ Route::middleware(['auth', 'pembina'])->group(function () {
     Route::get('/pembina/absensi', [DataAbsensiController::class, 'absensi'])->name('pbAbsensi');
     Route::get('/pembina/absensi/delete/{id}', [DataAbsensiController::class, 'deleteAbsensi'])->name('pbDeleteAbsensi');
     Route::get('/pembina/absensi/laporan', [DataAbsensiController::class, 'laporan'])->name('pbLaporan');
+    Route::post('/pembina/absensi/laporan/cetak', [DataAbsensiController::class, 'cetakLaporan'])->name('pbCetakLaporan');
 });
 
 Route::middleware(['auth', 'member'])->group(function () {
