@@ -29,3 +29,4 @@ Route::get('/get-history', [HistoryController::class, 'getHistory']);
 
 // For 'AbsensiFragment'
 Route::post('/get-absensi', [AbsensiController::class, 'absensiMasuk']);
+Route::post('/out-absensi', [AbsensiController::class, 'absensiKeluar']);
