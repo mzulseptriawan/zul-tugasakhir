@@ -16,13 +16,13 @@ Route::get('/user', function (Request $request) {
 Route::post('login', [LoginController::class, 'login']);
 
 // For 'HomeFragment', 'HistoryFragment', 'ProfileFragment'
-Route::apiResource('/profiles',ProfileController::class);
+Route::get('/profiles/{id_detail}',[ProfileController::class, 'index']);
 
 // For 'HomeFragment'
-Route::get('/count-hadir', [TotalAbsensiController::class, 'countHadir']);
-Route::get('/count-sakit', [TotalAbsensiController::class, 'countSakit']);
-Route::get('/count-izin', [TotalAbsensiController::class, 'countIzin']);
-Route::get('/count-alfa', [TotalAbsensiController::class, 'countAlfa']);
+Route::get('/count-hadir/{id_detail}', [TotalAbsensiController::class, 'countHadir']);
+Route::get('/count-sakit/{id_detail}', [TotalAbsensiController::class, 'countSakit']);
+Route::get('/count-izin/{id_detail}', [TotalAbsensiController::class, 'countIzin']);
+Route::get('/count-alfa/{id_detail}', [TotalAbsensiController::class, 'countAlfa']);
 
 // For 'HistoryFragment'
 Route::get('/get-history', [HistoryController::class, 'getHistory']);

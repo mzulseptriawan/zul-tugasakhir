@@ -10,27 +10,47 @@ use Illuminate\Support\Facades\DB;
 
 class TotalAbsensiController extends Controller
 {
-    public function countHadir() {
-        $countHadir = DB::table('absensis')->where('jenis_absensi', 'Hadir')->count();
+    public function countHadir($id_detail) {
+        $countHadir = Absensi::where('id_detail', $id_detail)
+            ->where('jenis_absensi', 'Hadir')
+            ->count();
 
-        return response()->json(['count' => $countHadir]);
+        return response()->json([
+            'success' => true,
+            'count' => $countHadir,
+        ]);
     }
 
-    public function countSakit() {
-        $countSakit = DB::table('absensis')->where('jenis_absensi', 'Sakit')->count();
+    public function countSakit($id_detail) {
+        $countSakit = Absensi::where('id_detail', $id_detail)
+            ->where('jenis_absensi', 'Sakit')
+            ->count();
 
-        return response()->json(['count' => $countSakit]);
+        return response()->json([
+            'success' => true,
+            'count' => $countSakit,
+        ]);
     }
 
-    public function countIzin() {
-        $countIzin = DB::table('absensis')->where('jenis_absensi', 'Izin')->count();
+    public function countIzin($id_detail) {
+        $countIzin = Absensi::where('id_detail', $id_detail)
+            ->where('jenis_absensi', 'Izin')
+            ->count();
 
-        return response()->json(['count' => $countIzin]);
+        return response()->json([
+            'success' => true,
+            'count' => $countIzin,
+        ]);
     }
 
-    public function countAlfa() {
-        $countAlfa = DB::table('absensis')->where('jenis_absensi', 'Alfa')->count();
+    public function countAlfa($id_detail) {
+        $countAlfa = Absensi::where('id_detail', $id_detail)
+            ->where('jenis_absensi', 'Alfa')
+            ->count();
 
-        return response()->json(['count' => $countAlfa]);
+        return response()->json([
+            'success' => true,
+            'count' => $countAlfa,
+        ]);
     }
 }

@@ -35,4 +35,7 @@ return [
         ],
     ],
 
+    'gmaps' => [ env('API_KEY_GMAPS', 'NULL FROM SERVICES'),],
+
+
 ];

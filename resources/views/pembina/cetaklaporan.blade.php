@@ -170,19 +170,29 @@
         </tr>
         @foreach ($absensi as $row)
             @php
-                $path_in        = Storage::url('public/foto_absensi/'.$row->foto_masuk);
-                $path_out       = Storage::url('public/foto_absensi/'.$row->foto_keluar);
-                $jamterlambat   = selisih('08:00:00', $row->jam_masuk);
+                $fotoUrl = '';
+                if ($row->jenis_absensi == 'Hadir') {
+                    $fotoUrl = url('storage/api/uploads/foto_absensi/foto_masuk/' . $row->foto_masuk);
+                } elseif ($row->jenis_absensi == 'Sakit') {
+                    $fotoUrl = url('storage/api/uploads/foto_absensi/foto_sakit/' . $row->foto_masuk);
+                } elseif ($row->jenis_absensi == 'Izin') {
+                    $fotoUrl = url('storage/api/uploads/foto_absensi/foto_izin/' . $row->foto_masuk);
+                } else {
+                    $fotoUrl = 'https://via.placeholder.com/100x100?text=No+Image';
+                }
+//                    $path_in        = Storage::url('public/foto_absensi/'.$row->foto_masuk);
+//                    $path_out       = Storage::url('public/foto_absensi/'.$row->foto_keluar);
+                    $jamterlambat   = selisih('08:00:00', $row->jam_masuk);
             @endphp
             <tr align="center">
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ date("d-m-Y", strtotime($row->tanggal_masuk)) }}</td>
                 <td>{{ $row->jam_masuk }}</td>
-                <td><img src="{{ $path_in }}" width="20%"></td>
+                <td><img src="{{ $fotoUrl }}" width="20%"></td>
                 <td>{{ $row->jam_keluar != null ? $row->jam_keluar : 'Belum Absen' }}</td>
                 <td>
                     @if ($row->foto_keluar != null)
-                        <img src="{{ url($path_out) }}" width='20%'>
+                        <img src="{{ url($fotoUrl) }}" width='20%'>
                     @else
                         <img src="{{ asset('assets/img/avatar/null.jpg') }}" width='20%'>
                     @endif

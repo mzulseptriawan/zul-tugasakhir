@@ -37,9 +37,12 @@ class DataPegawaiController extends Controller
 
     public function submitPegawai(Request $req) {
         try {
-            $this->validate($req,[
-                'foto_pegawai'      => 'required|image|mimes:png,jpg,jpeg,webp'
+            $this->validate($req, [
+                'foto_pegawai' => 'required|image|mimes:png,jpg,jpeg,webp',
+                'nik' => ['required', 'numeric', 'regex:/^[0-9]+$/', 'min:0'],
+                'gaji' => ['required', 'numeric', 'min:0'],
             ]);
+
 
             //upload image
             $image = $req->file('foto_pegawai');
