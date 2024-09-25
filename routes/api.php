@@ -32,3 +32,6 @@ Route::post('/get-absensi', [AbsensiController::class, 'absensiMasuk']);
 Route::post('/out-absensi', [AbsensiController::class, 'absensiKeluar']);
 Route::post('/sakit-absensi', [AbsensiController::class, 'absensiSakit']);
 Route::post('/izin-absensi', [AbsensiController::class, 'absensiIzin']);
+
+// For 'EditActivity'
+Route::post('/update-profile/{id_detail}', [ProfileController::class, 'editProfile']);

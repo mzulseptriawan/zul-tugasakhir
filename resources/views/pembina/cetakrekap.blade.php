@@ -86,7 +86,7 @@
             </th>
             <th>
                 <span class="title">
-                    REKAP ABSENSI KARYAWAN<br>
+                    REKAP ABSENSI INTERNSHIP<br>
                     PERIODE {{ strtoupper($namaBulan[$bulan]) }} {{ $tahun }}<br>
                     KOMITE EKONOMI KREATIF DAN INOVASI KOTA SUKABUMI <br>
                 </span>

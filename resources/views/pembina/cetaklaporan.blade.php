@@ -57,59 +57,48 @@
     </style>
 </head>
 
-<!-- Set "A5", "A4" or "A3" for class name -->
-<!-- Set also "landscape" if you need -->
 <body class="A4">
 @php
-    use Illuminate\Support\Facades\Storage;function selisih($jam_masuk, $jam_keluar) {
-        // Tentukan jam kerja awal dan akhir
-        $jam_awal = new DateTime('07:00');
-        $jam_akhir = new DateTime('15:00');
+    use Illuminate\Support\Facades\Storage;
+    function selisih($jam_masuk, $jam_keluar) {
+        $jam_awal = new DateTime('08:00:00');
+        $jam_akhir = new DateTime('15:00:00');
 
         $jam_masuk = new DateTime($jam_masuk);
         $jam_keluar = new DateTime($jam_keluar);
 
-        // Jika jam masuk lebih awal dari jam kerja, atur jam masuk ke jam kerja awal
         if ($jam_masuk < $jam_awal) {
             $jam_masuk = clone $jam_awal;
         }
 
-        // Jika jam keluar lebih lambat dari jam kerja, atur jam keluar ke jam kerja akhir
         if ($jam_keluar > $jam_akhir) {
             $jam_keluar = clone $jam_akhir;
         }
 
-        // Pastikan bahwa jam keluar tidak lebih awal dari jam masuk
         if ($jam_keluar < $jam_masuk) {
             $jam_keluar = clone $jam_masuk;
         }
 
         $interval = $jam_masuk->diff($jam_keluar);
-
         $jml_jam = $interval->h;
         $sisamenit2 = $interval->i;
 
-        return $jml_jam . ":" . $sisamenit2;
+        return $jml_jam . ":" . str_pad($sisamenit2, 2, '0', STR_PAD_LEFT);
     }
 @endphp
-    <!-- Each sheet element should have the class "sheet" -->
-<!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
-<section class="sheet padding-10mm">
 
-    <!-- Write HTML just like a web page -->
+<section class="sheet padding-10mm">
     <table style="width: 100%">
         <tr>
             <th style="width: 30px">
                 <img src="{{ asset('../assets/images/logos/logo-kreasismi.png') }}" width="150">
             </th>
-
             <th>
                 <span class="title">
                     LAPORAN ABSENSI INTERNSHIP<br>
                     PERIODE {{ strtoupper($namaBulan[$bulan]) }} {{ $tahun }}<br>
                     KOMITE EKONOMI KREATIF DAN INOVASI KOTA SUKABUMI <br>
                 </span>
-
                 <span>
                     <i>Jl. Cipelang Leutik No.217, Selabatu, Kec. Cikole, Kota Sukabumi, Jawa Barat 43114</i>
                 </span>
@@ -118,11 +107,11 @@
     </table>
 
     <hr class="garis">
+
     <table class="tabeldatakaryawan" align="left">
         <tr>
             <td rowspan="6">
                 @php
-//                    $path = Storage::url('public/foto_internship/'.$internship -> foto_internship);
                     $path = Storage::exists('public/foto_internship/'.$internship->foto_internship)
                             ? Storage::url('public/foto_internship/'.$internship->foto_internship)
                             : asset('assets/img/avatar/default.jpg');
@@ -180,9 +169,8 @@
                 } else {
                     $fotoUrl = 'https://via.placeholder.com/100x100?text=No+Image';
                 }
-//                    $path_in        = Storage::url('public/foto_absensi/'.$row->foto_masuk);
-//                    $path_out       = Storage::url('public/foto_absensi/'.$row->foto_keluar);
-                    $jamterlambat   = selisih('08:00:00', $row->jam_masuk);
+
+                $jamterlambat = selisih('08:00:00', $row->jam_masuk);
             @endphp
             <tr align="center">
                 <td>{{ $loop->iteration }}</td>
@@ -192,7 +180,7 @@
                 <td>{{ $row->jam_keluar != null ? $row->jam_keluar : 'Belum Absen' }}</td>
                 <td>
                     @if ($row->foto_keluar != null)
-                        <img src="{{ url($fotoUrl) }}" width='20%'>
+                        <img src="{{ url('storage/api/uploads/foto_absensi/foto_keluar/' . $row->foto_keluar) }}" width='20%'>
                     @else
                         <img src="{{ asset('assets/img/avatar/null.jpg') }}" width='20%'>
                     @endif
@@ -211,7 +199,7 @@
                         @endphp
                     @else
                         @php
-                            $jmljamkerja = 0;
+                            $jmljamkerja = '0:00';
                         @endphp
                     @endif
                     {{ $jmljamkerja }}
@@ -227,17 +215,14 @@
         <tr>
             <td style="text-align: center; vertical-align: bottom" height="100px">
                 <u>Anzhar Pratama</u><br>
-                <i><b>Manager Bidang Analisis Data dan Sistem Informasi</b></i>
+                <i><b>Manager Bidang Sekretariat</b></i>
             </td>
-
             <td style="text-align: center; vertical-align: bottom">
-                <u>Wega Gunawan</u><br>
-                <i><b>Direktur</b></i>
+                <u>{{ $internship->nama_lengkap }}</u><br>
+                <i><b>{{ $internship->posisi }}</b></i>
             </td>
         </tr>
     </table>
 </section>
-
 </body>
-
 </html>
