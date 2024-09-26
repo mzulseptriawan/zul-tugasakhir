@@ -40,7 +40,7 @@ class DataPegawaiController extends Controller
             $this->validate($req, [
                 'foto_pegawai' => 'required|image|mimes:png,jpg,jpeg,webp',
                 'nik' => ['required', 'numeric', 'regex:/^[0-9]+$/', 'min:0'],
-                'gaji' => ['required', 'numeric', 'min:0'],
+                'gaji' => ['required', 'min:0', 'max:32'],
             ]);
 
 

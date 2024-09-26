@@ -52,8 +52,9 @@ class LoginController extends Controller
             Alert('Akun di-nonaktifkan!', 'Silahkan hubungi Admin.' ,'error');
             return redirect('/');
         } else if ($user -> level == 3 && $user -> status == "Aktif") {
-            Alert('Akses Dilarang!', 'Anda tidak seharusnya masuk disini. '. Auth::user() -> name ,'success');
-            return redirect('/member/dashboard');
+            $request->session()->flush();
+            Alert('Akses Dilarang!', 'Anda tidak seharusnya masuk disini. '. Auth::user() -> name ,'error');
+            return redirect('/');
         } else if ($user -> level == 3 && $user -> status == "Tidak Aktif") {
             $request->session()->flush();
             Alert('Akun di-nonaktifkan!', 'Silahkan hubungi Admin.' ,'error');

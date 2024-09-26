@@ -37,9 +37,8 @@ class DataInternshipController extends Controller {
     public function submitInternship(Request $req) {
         try {
             $this->validate($req, [
-                'foto_pegawai' => 'required|image|mimes:png,jpg,jpeg,webp',
+                'foto_internship' => 'required|image|mimes:png,jpg,jpeg,webp',
                 'nik' => ['required', 'numeric', 'regex:/^[0-9]+$/', 'min:0'],
-                'gaji' => ['required', 'numeric', 'min:0'],
             ]);
 
             //upload image
