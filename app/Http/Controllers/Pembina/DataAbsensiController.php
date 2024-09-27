@@ -51,7 +51,6 @@ class DataAbsensiController extends Controller
 
         $internship = DB::table('absensis')
             ->join('internships', 'absensis.id_detail', '=', 'internships.id_detail')
-            ->where('absensis.id_detail', $req -> id_detail)
             ->select('absensis.*', 'internships.*')
             ->first();
 

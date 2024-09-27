@@ -100,7 +100,7 @@
     <table class="tabelabsensi">
         <tr>
             <th rowspan="2">NIK</th>
-            <th rowspan="2">Nama Karyawan</th>
+            <th rowspan="2">Nama Internship</th>
             <th colspan="31">Tanggal</th>
             <th rowspan="2">Total Hadir</th>
             <th rowspan="2">Total Terlambat</th>

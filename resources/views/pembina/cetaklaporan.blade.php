@@ -60,6 +60,7 @@
 <body class="A4">
 @php
     use Illuminate\Support\Facades\Storage;
+
     function selisih($jam_masuk, $jam_keluar) {
         $jam_awal = new DateTime('08:00:00');
         $jam_akhir = new DateTime('15:00:00');
@@ -112,9 +113,9 @@
         <tr>
             <td rowspan="6">
                 @php
-                    $path = Storage::exists('public/foto_internship/'.$internship->foto_internship)
-                            ? Storage::url('public/foto_internship/'.$internship->foto_internship)
-                            : asset('assets/img/avatar/default.jpg');
+                    $path = Storage::exists('public/foto_internship/'.$internship -> foto_internship)
+                    ? Storage::url('public/foto_internship/'.$internship -> foto_internship)
+                    : asset('assets/img/avatar/default.jpg');
                 @endphp
                 <img src="{{ $path }}" width="150">
             </td>
