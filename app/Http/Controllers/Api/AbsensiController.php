@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Absensi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -299,6 +300,22 @@ class AbsensiController extends Controller
                 "message" => "Gagal menyimpan data izin."
             ], 500);
         }
+    }
+
+    public function updateJenisAbsensi(Request $request)
+    {
+        // Validasi jenis_absensi
+        $request->validate([
+            'id_absensi' => 'required|integer',
+            'jenis_absensi' => 'required|in:Hadir,Sakit,Izin,Alfa',
+        ]);
+
+        // Update status berdasarkan ID absensi
+        DB::table('absensis')
+            ->where('id_absensi', $request->id_absensi) // Perbaikan di sini
+            ->update(['jenis_absensi' => $request->jenis_absensi]);
+
+        return response()->json(['success' => 'Jenis absensi berhasil diperbarui.']);
     }
 
 }

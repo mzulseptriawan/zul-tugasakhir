@@ -110,7 +110,12 @@
                                     <span class="fw-normal">{{ $data->posisi }}</span>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">{{ $data->jenis_absensi }}</h6>
+                                    <select name="jenis_absensi" class="form-select" data-id="{{ $data->id_absensi }}">
+                                        <option value="Hadir" @if($data->jenis_absensi == 'Hadir') selected @endif>Hadir</option>
+                                        <option value="Sakit" @if($data->jenis_absensi == 'Sakit') selected @endif>Sakit</option>
+                                        <option value="Izin" @if($data->jenis_absensi == 'Izin') selected @endif>Izin</option>
+                                        <option value="Alfa" @if($data->jenis_absensi == 'Alfa') selected @endif>Alfa</option>
+                                    </select>
                                 </td>
                                 <td class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">{{ $data->tanggal_masuk }}</h6>
@@ -193,15 +198,60 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        import DataTable from 'datatables.net-dt';
+        $(document).ready(function() {
+            // Ketika status absensi diubah
+            $('select[name="jenis_absensi"]').change(function() {
+                var absensiId = $(this).data('id');
+                var newStatus = $(this).val();
+                var dropdown = $(this);
 
-        let table = new DataTable('#myTable', {
-            responsive: true
-        });
-
-        $(document).ready( function () {
-            $('#myTable').DataTable();
+                // Menggunakan SweetAlert untuk konfirmasi
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Anda akan mengubah jenis absensi!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, Ubah!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '{{ route('pbUpdateJenisAbsensi') }}', // Route update absensi
+                            type: 'POST',
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                                "id_absensi": absensiId,
+                                "jenis_absensi": newStatus
+                            },
+                            success: function(response) {
+                                Swal.fire(
+                                    'Berhasil!',
+                                    'Jenis absensi berhasil diperbarui.',
+                                    'success'
+                                ).then(() => {
+                                    location.reload(); // Memuat ulang halaman setelah sukses
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire(
+                                    'Error!',
+                                    'Terjadi kesalahan saat memperbarui absensi.',
+                                    'error'
+                                );
+                            }
+                        });
+                    } else {
+                        // Kembalikan dropdown ke status sebelumnya jika dibatalkan
+                        dropdown.val(dropdown.find('option[selected]').val());
+                    }
+                });
+            });
         });
     </script>
+
 @endsection

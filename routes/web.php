@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Api\AbsensiController;
 use App\Http\Controllers\Pembina\DataAbsensiController;
 use App\Http\Controllers\Pembina\DataInternshipController;
 use App\Http\Controllers\Pembina\DataPegawaiController;
@@ -64,6 +65,7 @@ Route::middleware(['auth', 'pembina'])->group(function () {
     Route::get('/pembina/absensi/laporan', [DataAbsensiController::class, 'laporan'])->name('pbLaporan');
     Route::post('/pembina/absensi/laporan/cetak', [DataAbsensiController::class, 'cetakLaporan'])->name('pbCetakLaporan');
     Route::post('/pembina/absensi/laporan/rekap/cetak', [DataAbsensiController::class, 'cetakRekap'])->name('pbCetakRekap');
+    Route::post('/pembina/absensi/update-jenis', [AbsensiController::class, 'updateJenisAbsensi'])->name('pbUpdateJenisAbsensi');
 });
 
 Route::middleware(['auth', 'member'])->group(function () {
