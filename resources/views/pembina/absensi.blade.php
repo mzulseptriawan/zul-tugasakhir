@@ -36,7 +36,7 @@
                                 <h6 class="fw-semibold mb-0">Lokasi Masuk</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Peta Lokasi Masuk</h6> <!-- Kolom Peta Lokasi Masuk -->
+                                <h6 class="fw-semibold mb-0">Peta Lokasi Masuk</h6>
                             </th>
                             <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Foto Masuk</h6>
@@ -49,6 +49,9 @@
                             </th>
                             <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Lokasi Keluar</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Peta Lokasi Keluar</h6>
                             </th>
                             <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Foto Keluar</h6>
