@@ -18,11 +18,11 @@ Proyek ini adalah implementasi dari **Metode LBS (Location Based Service)** pada
 ## Instalasi
 1. Clone repository ini:
     ```bash
-    git clone https://github.com/username/repository.git
+    git clone https://github.com/mzulseptriawan/zul-tugasakhir.git
     ```
 2. Masuk ke direktori proyek:
     ```bash
-    cd nama-repository
+    cd nama-folder
     ```
 3. Install dependency menggunakan Composer:
     ```bash
