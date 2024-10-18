@@ -9,4 +9,6 @@
     <!-- Bootstrap CSS -->
     <link href="{{ asset('https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <!-- leaflet.css -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>

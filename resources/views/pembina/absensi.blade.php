@@ -17,51 +17,19 @@
                     <table id="example" class="table text-nowrap mb-0 align-middle display">
                         <thead class="text-dark fs-4">
                         <tr>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">No</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Nama</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Jenis Absensi</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Tanggal Masuk</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Waktu Masuk</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Lokasi Masuk</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Peta Lokasi Masuk</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Foto Masuk</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Tanggal Keluar</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Waktu Keluar</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Lokasi Keluar</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Peta Lokasi Keluar</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Foto Keluar</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Keterangan</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Aksi</h6>
-                            </th>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Jenis Absensi</th>
+                            <th>Tanggal Masuk</th>
+                            <th>Waktu Masuk</th>
+                            <th>Peta Lokasi Masuk</th>
+                            <th>Foto Masuk</th>
+                            <th>Tanggal Keluar</th>
+                            <th>Waktu Keluar</th>
+                            <th>Peta Lokasi Keluar</th>
+                            <th>Foto Keluar</th>
+                            <th>Keterangan</th>
+                            <th>Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -78,33 +46,21 @@
                                 } elseif ($data->jenis_absensi == 'Izin') {
                                     $fotoUrl = url('storage/api/uploads/foto_absensi/foto_izin/' . $data->foto_masuk);
                                 } else {
-                                    $fotoUrl = 'https://via.placeholder.com/100x100?text=No+Image';
+                                    $fotoUrl = 'https://via.placeholder.com/200x200?text=No+Image';
                                 }
 
-                                // Koordinat untuk peta
-                                $apiKey = env('API_KEY_GMAPS');
-                                $defaultCoordinates = ['-6.902882586503939', '106.9325702637434']; // Koordinat default
-
                                 // Ambil koordinat lokasi masuk
-                                $coordinatesMasuk = explode(',', $data->lokasi_masuk) ?: $defaultCoordinates;
-                                $latitudeMasuk = isset($coordinatesMasuk[0]) ? trim($coordinatesMasuk[0]) : $defaultCoordinates[0];
-                                $longitudeMasuk = isset($coordinatesMasuk[1]) ? trim($coordinatesMasuk[1]) : $defaultCoordinates[1];
+                                $coordinatesMasuk = explode(',', $data->lokasi_masuk);
+                                $latitudeMasuk = isset($coordinatesMasuk[0]) ? trim($coordinatesMasuk[0]) : null;
+                                $longitudeMasuk = isset($coordinatesMasuk[1]) ? trim($coordinatesMasuk[1]) : null;
 
                                 // Ambil koordinat lokasi keluar
-                                $coordinatesKeluar = explode(',', $data->lokasi_keluar) ?: $defaultCoordinates;
-                                $latitudeKeluar = isset($coordinatesKeluar[0]) ? trim($coordinatesKeluar[0]) : $defaultCoordinates[0];
-                                $longitudeKeluar = isset($coordinatesKeluar[1]) ? trim($coordinatesKeluar[1]) : $defaultCoordinates[1];
-
-                                // Buat URL untuk peta lokasi masuk
-                                $mapUrlMasuk = "https://www.google.com/maps/embed/v1/view?key={$apiKey}&center={$latitudeMasuk},{$longitudeMasuk}&zoom=15";
-
-                                // Buat URL untuk peta lokasi keluar
-                                $mapUrlKeluar = "https://www.google.com/maps/embed/v1/view?key={$apiKey}&center={$latitudeKeluar},{$longitudeKeluar}&zoom=15";
+                                $coordinatesKeluar = explode(',', $data->lokasi_keluar);
+                                $latitudeKeluar = isset($coordinatesKeluar[0]) ? trim($coordinatesKeluar[0]) : null;
+                                $longitudeKeluar = isset($coordinatesKeluar[1]) ? trim($coordinatesKeluar[1]) : null;
                             @endphp
                             <tr>
-                                <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">{{ $no++ }}</h6>
-                                </td>
+                                <td>{{ $no++ }}</td>
                                 <td class="border-bottom-0">
                                     <h6 class="fw-semibold mb-1">{{ $data->nama_lengkap }}</h6>
                                     <span class="fw-normal">{{ $data->posisi }}</span>
@@ -117,61 +73,19 @@
                                         <option value="Alfa" @if($data->jenis_absensi == 'Alfa') selected @endif>Alfa</option>
                                     </select>
                                 </td>
-                                <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">{{ $data->tanggal_masuk }}</h6>
+                                <td>{{ $data->tanggal_masuk }}</td>
+                                <td>{{ $data->jam_masuk }}</td>
+                                <td>
+                                    <div id="map-masuk-{{ $data->id_absensi }}" style="height: 200px;"></div>
                                 </td>
-                                <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">{{ $data->jam_masuk }}</h6>
+                                <td><img class="img-fluid" width="100" height="100" src="{{ $fotoUrl }}" alt="Foto Masuk"></td>
+                                <td>{{ $data->tanggal_keluar ?? 'Belum absen keluar' }}</td>
+                                <td>{{ $data->jam_keluar ?? 'Belum absen keluar' }}</td>
+                                <td>
+                                    <div id="map-keluar-{{ $data->id_absensi }}" style="height: 200px;"></div>
                                 </td>
-                                <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">{{ $latitudeMasuk }}</h6>
-                                    <h6 class="fw-semibold mb-0">{{ $longitudeMasuk }}</h6>
-                                </td>
-                                <td class="border-bottom-0">
-                                    <iframe src="{{ $mapUrlMasuk }}" width="300" height="150" style="border:0;" allowfullscreen="" loading="lazy" onclick=""></iframe> <!-- Embed Peta -->
-                                </td>
-                                <td class="border-bottom-0">
-                                    <img class="img-fluid" width="100" height="100" src="{{ $fotoUrl }}" alt="Foto Masuk">
-                                </td>
-                                <td class="border-bottom-0">
-                                    @if (!$data -> tanggal_keluar == \PHPUnit\Framework\isEmpty())
-                                        <h6 class="fw-semibold mb-0">Pengguna belum/tidak</h6>
-                                        <h6 class="fw-semibold mb-0">melakukan absensi keluar.</h6>
-                                    @else
-                                        <h6 class="fw-semibold mb-0">{{ $data->tanggal_keluar }}</h6>
-                                    @endif
-                                </td>
-                                <td class="border-bottom-0">
-                                    @if (!$data -> jam_keluar == \PHPUnit\Framework\isEmpty())
-                                        <h6 class="fw-semibold mb-0">Pengguna belum/tidak</h6>
-                                        <h6 class="fw-semibold mb-0">melakukan absensi keluar.</h6>
-                                    @else
-                                        <h6 class="fw-semibold mb-0">{{ $data->jam_keluar }}</h6>
-                                    @endif
-                                </td>
-                                <td class="border-bottom-0">
-                                    @if (!$data -> lokasi_keluar == \PHPUnit\Framework\isEmpty())
-                                        <h6 class="fw-semibold mb-0">Pengguna belum/tidak</h6>
-                                        <h6 class="fw-semibold mb-0">melakukan absensi keluar.</h6>
-                                    @else
-                                        <h6 class="fw-semibold mb-0">{{ $latitudeKeluar }}</h6>
-                                        <h6 class="fw-semibold mb-0">{{ $longitudeKeluar }}</h6>
-                                    @endif
-                                </td>
-                                <td class="border-bottom-0">
-                                    @if (!$data -> lokasi_keluar == \PHPUnit\Framework\isEmpty())
-                                        <h6 class="fw-semibold mb-0">Pengguna belum/tidak</h6>
-                                        <h6 class="fw-semibold mb-0">melakukan absensi keluar.</h6>
-                                    @else
-                                        <iframe src="{{ $mapUrlKeluar }}" width="300" height="150" style="border:0;" allowfullscreen="" loading="lazy" onclick=""></iframe>
-                                    @endif
-                                </td>
-                                <td class="border-bottom-0">
-                                    <img class="img-fluid" width="100" height="100" src="{{ url('storage/api/uploads/foto_absensi/foto_keluar/' . $data->foto_keluar) }}" alt="Foto Keluar">
-                                </td>
-                                <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">{{ $data->keterangan }}</h6>
-                                </td>
+                                <td><img class="img-fluid" width="100" height="100" src="{{ url('storage/api/uploads/foto_absensi/foto_keluar/' . $data->foto_keluar) }}" alt="Foto Keluar"></td>
+                                <td>{{ $data->keterangan }}</td>
                                 <td class="nav-item dropdown">
                                     <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="ti ti-menu-2 fs-6"></i>
@@ -188,7 +102,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="10" class="text-center">Data Absensi Kosong</td>
+                                <td colspan="15" class="text-center">Data Absensi Kosong</td>
                             </tr>
                         @endforelse
                         </tbody>
@@ -198,6 +112,36 @@
         </div>
     </div>
 
+    {{--for OSM--}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @forelse($absensi as $data)
+            var latitudeMasuk = {{ $latitudeMasuk ?? 'null' }};
+            var longitudeMasuk = {{ $longitudeMasuk ?? 'null' }};
+            var latitudeKeluar = {{ $latitudeKeluar ?? 'null' }};
+            var longitudeKeluar = {{ $longitudeKeluar ?? 'null' }};
+
+            if (latitudeMasuk && longitudeMasuk) {
+                var mapMasuk = L.map('map-masuk-{{ $data->id_absensi }}').setView([latitudeMasuk, longitudeMasuk], 15);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(mapMasuk);
+                L.marker([latitudeMasuk, longitudeMasuk]).addTo(mapMasuk);
+            }
+
+            if (latitudeKeluar && longitudeKeluar) {
+                var mapKeluar = L.map('map-keluar-{{ $data->id_absensi }}').setView([latitudeKeluar, longitudeKeluar], 15);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(mapKeluar);
+                L.marker([latitudeKeluar, longitudeKeluar]).addTo(mapKeluar);
+            }
+            @empty
+            @endforelse
+        });
+    </script>
+
+    {{--  for dropdown jenis_absensi  --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -253,5 +197,4 @@
             });
         });
     </script>
-
 @endsection
