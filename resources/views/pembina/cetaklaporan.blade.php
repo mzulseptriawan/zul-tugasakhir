@@ -155,6 +155,7 @@
             <th>Foto</th>
             <th>Jam Pulang</th>
             <th>Foto</th>
+            <th>Tepat Waktu / Terlambat</th>
             <th>Keterangan</th>
             <th>Jam Kerja</th>
         </tr>
@@ -194,13 +195,16 @@
                     @endif
                 </td>
                 <td>
+                    {{ $row -> keterangan }}
+                </td>
+                <td>
                     @if ($row->jam_keluar != null)
                         @php
                             $jmljamkerja = selisih($row->jam_masuk, $row->jam_keluar);
                         @endphp
                     @else
                         @php
-                            $jmljamkerja = '0:00';
+                            $jmljamkerja = '00:00';
                         @endphp
                     @endif
                     {{ $jmljamkerja }}
