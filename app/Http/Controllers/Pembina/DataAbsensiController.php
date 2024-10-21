@@ -19,7 +19,9 @@ class DataAbsensiController extends Controller
                 ->select('absensis.*', 'internships.*')->get()
         );
 
-        return view('pembina.absensi', $query);
+        $namaBulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+        return view('pembina.absensi', compact('namaBulan'), $query);
     }
 
     public function deleteAbsensi($id) {

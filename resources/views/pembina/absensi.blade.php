@@ -13,6 +13,36 @@
         <div class="card w-100">
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Data Absensi</h5>
+                <!-- Filter Tahun dan Bulan -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <select id="filter-bulan" class="form-select">
+                            <option value="">- Pilih Bulan -</option>
+                            @php
+                                // Mendapatkan bulan saat ini
+                                $currentMonth = date("m");
+                            @endphp
+                            @for ($i = 1; $i <= 12; $i++)
+                                <option value="{{ $i }}" {{ $currentMonth == $i ? 'selected' : '' }}>
+                                    {{ $namaBulan[$i] }}
+                                </option>
+                            @endfor
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <select id="filter-tahun" class="form-select">
+                            <option value="">- Pilih Tahun -</option>
+                            @php
+                                $startYear     = 2022;
+                                $nowYear      = date("Y");
+                            @endphp
+                            @for ($year = $startYear; $year <=$nowYear; $year++)
+                                <option value="{{ $year }}" {{ date("Y") ==$year ? 'selected' : ''}}>{{ $year }}</option>
+                            @endfor
+                        </select>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table id="example" class="table text-nowrap mb-0 align-middle display">
                         <thead class="text-dark fs-4">
@@ -195,6 +225,25 @@
                     }
                 });
             });
+        });
+    </script>
+
+    {{--  for sorting data  --}}
+    <script>
+        $(document).ready(function () {
+            var table = $('#example').DataTable();
+
+            // Event untuk filter Tahun dan Bulan
+            $('#filter-tahun, #filter-bulan').on('change', function () {
+                filterTable();
+            });
+
+            function filterTable() {
+                var tahun = $('#filter-tahun').val();
+                var bulan = $('#filter-bulan').val();
+
+                table.columns(3).search(tahun + '-' + bulan).draw();
+            }
         });
     </script>
 @endsection
